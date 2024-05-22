@@ -58,7 +58,7 @@ QTabBar::tab:hover {
 }</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -220,10 +220,10 @@ QComboBox QAbstractItemView {
        <enum>QFrame::NoFrame</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_1_addEI">
-       <widget class="QLabel" name="label_1_enter_2">
+       <widget class="QLabel" name="label_1_enter">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -242,7 +242,7 @@ QComboBox QAbstractItemView {
          <string>Введите информацию о новой ЕИ:</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_1_search_2">
+       <widget class="QLabel" name="label_1_search">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -376,7 +376,7 @@ QPushButton:pressed {
          <string>Полное название</string>
         </property>
        </widget>
-       <widget class="QTextEdit" name="textEdit_1_searchResult_2">
+       <widget class="QTextEdit" name="textEdit_1_result">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -403,7 +403,7 @@ QPushButton:pressed {
        </widget>
       </widget>
       <widget class="QWidget" name="page_2_deleteEI">
-       <widget class="QTextEdit" name="textEdit_2_searchResult">
+       <widget class="QTextEdit" name="textEdit_2_result">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -428,7 +428,7 @@ QPushButton:pressed {
          <string>Здесь будут подробности проведенной операции</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_2_search">
+       <widget class="QLabel" name="label_2_result">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -447,7 +447,7 @@ QPushButton:pressed {
          <string>Результат удаления:</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_2_enter">
+       <widget class="QLabel" name="label_2_id">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -493,7 +493,7 @@ QPushButton:pressed {
          <string>ИД</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_2_search">
+       <widget class="QPushButton" name="pushButton_2_delete">
         <property name="geometry">
          <rect>
           <x>680</x>

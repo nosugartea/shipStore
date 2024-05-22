@@ -235,17 +235,89 @@ void MainWindow::setComboBoxVal()
 
 void MainWindow::onMyButtonClickAdd_1()
 {
+    ui->textEdit_1_result->clear();
+    QString code = ui->lineEdit_1_code->text();
+    QString name = ui->lineEdit_1_name->text();
+    QString shortName = ui->lineEdit_1_shortName->text();
+    if (code.isEmpty() || code == warnEmpty) {
+        ui->lineEdit_1_code->setText(warnEmpty);
+    }
+    if (name.isEmpty() || name == warnEmpty) {
+        ui->lineEdit_1_name->setText(warnEmpty);
+    }
+    if (shortName.isEmpty() || shortName == warnEmpty) {
+        ui->lineEdit_1_shortName->setText(warnEmpty);
+    }
+    if ((!code.isEmpty() && code != warnEmpty) &&
+        (!name.isEmpty() && name != warnEmpty) &&
+        (!shortName.isEmpty() && shortName != warnEmpty)){
+        QSqlQuery query;
+        query.prepare("SELECT * FROM INS_EI(:pCode, :pShortName, :pName);");
+        query.bindValue(":pCode", code);
+        query.bindValue(":pShortName", shortName);
+        query.bindValue(":pName", name);
 
+        if (query.exec()) {
+            while (query.next()) {
+                QSqlRecord record = query.record();
+                QString result_out = "";
+                for (int i = 0; i < record.count(); ++i) {
+                    result_out = record.value(i).toString();
+                }
+                if (result_out == "1")
+                {
+                    ui->textEdit_1_result->insertPlainText("Запись успешно создана.\n");
+                }
+            }
+        }
+    }
 }
 
 void MainWindow::onMyButtonClickDelete_2()
 {
+    ui->textEdit_2_result->clear();
+    QString code = ui->lineEdit_2_id->text();
+    if (code.isEmpty() || code == warnEmpty) {
+        ui->lineEdit_1_code->setText(warnEmpty);
+    }
+    if (!code.isEmpty() && code != warnEmpty) {
+        QSqlQuery query;
+        query.prepare("SELECT * FROM DEL_EI(:pCode);");
+        query.bindValue(":pCode", code);
 
+        if (query.exec()) {
+            while (query.next()) {
+                QSqlRecord record = query.record();
+                QString result_out = "";
+                for (int i = 0; i < record.count(); ++i) {
+                    result_out = record.value(i).toString();
+                }
+                if (result_out == "1")
+                {
+                    ui->textEdit_2_result->insertPlainText("Запись успешно удалена.\n");
+                }
+            }
+        }
+    }
 }
 
 void MainWindow::onMyButtonClickSearch_3()
 {
+    ui->textEdit_3_searchResult->clear();
 
+    QSqlQuery query;
+    query.prepare("SELECT * FROM EI ORDER BY ID_EI;");
+
+    if (query.exec()) {
+        while (query.next()) {
+            QSqlRecord record = query.record();
+            QString result_out = "";
+            for (int i = 0; i < record.count(); ++i) {
+                result_out += record.value(i).toString() + " - ";
+            }
+            ui->textEdit_3_searchResult->insertPlainText(result_out + '\n');
+        }
+    }
 }
 
 void MainWindow::onMyButtonClickAdd_4()

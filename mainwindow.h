@@ -102,9 +102,8 @@ private slots:
 //     void onMyButtonClickMakeReportStation();
 
 private:
-     Ui::MainWindow *ui;
-
-//     QString warnEmpty = "Обязательное поле!!";
+    Ui::MainWindow *ui;
+    QString warnEmpty = "Обязательное поле!!";
 //     QString separator = "___________________________________________________________________________________________________________________________________________________";
 //     QString issue_4 = "";
 //     QString issue_6 = "";
