@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     db.setPort(5432);
     db.setUserName("postgres");
     db.setPassword("1234");
-    db.setDatabaseName("CarServiceBD");
+    db.setDatabaseName("ships2");
 
     if (db.open()) {
         QMessageBox::information(this, "Connection", "Database Connected");
@@ -31,10 +31,49 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidget->setAutoFillBackground(true);
     ui->statusBar->setStyleSheet("background-color: rgba(35, 35, 51, 255); color: white;");
     
-    // connect(ui->comboBox_EI, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBoxSearchCurrentTextChanged);
-    // connect(ui->comboBox_add, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBoxAddCurrentTextChanged);
+    connect(ui->comboBox_EI, &QComboBox::currentTextChanged,
+             this, &MainWindow::onComboBoxEI);
+    connect(ui->comboBox_class, &QComboBox::currentTextChanged,
+             this, &MainWindow::onComboBoxClass);
+    connect(ui->comboBox_prod, &QComboBox::currentTextChanged,
+            this, &MainWindow::onComboBoxProd);
+    connect(ui->comboBox_enum, &QComboBox::currentTextChanged,
+            this, &MainWindow::onComboBoxEnum);
+    connect(ui->comboBox_param, &QComboBox::currentTextChanged,
+            this, &MainWindow::onComboBoxParam);
+
+    setComboBoxEI();
+    setComboBoxClass();
+    setComboBoxMainClass();
+    setComboBoxPrad();
+    setComboBoxEnum();
+    setComboBoxVal();
+
+    // connect(ui->comboBox_4_idEI, &QComboBox::currentTextChanged,
+    //         this, &MainWindow::onComboBox4EI);
+
+    // void setComboBoxClass();
+    // connect(ui->comboBox_5_classId, &QComboBox::currentTextChanged,
+    //         this, &MainWindow::onComboBox5ClassId);
+    // connect(ui->comboBox_6_nameClass, &QComboBox::currentTextChanged,
+    //         this, &MainWindow::onComboBox6NameClass);
+    // connect(ui->comboBox_7_className, &QComboBox::currentTextChanged,
+    //         this, &MainWindow::onComboBox7ClassName);
+
+    // void setComboBoxMainClass();
+    // connect(ui->comboBox_4_mainClass, &QComboBox::currentTextChanged,
+    //         this, &MainWindow::onComboBox4MainClass);
+    // connect(ui->comboBox_6_nameMainClass, &QComboBox::currentTextChanged,
+    //         this, &MainWindow::onComboBox6MainClass);
+    // connect(ui->comboBox_7_mainClassName, &QComboBox::currentTextChanged,
+    //         this, &MainWindow::onComboBox7MainClass);
+
+    // void setComboBoxPrad();
+    // connect(ui->comboBox_5_classId, &QComboBox::currentTextChanged,
+    //         this, &MainWindow::onComboBox5ClassId);
+
+    // void setComboBoxEnum();
+    // void setComboBoxVal();
 
     // setComboBoxIssue();
     // connect(ui->comboBox_4_issue, &QComboBox::currentTextChanged,
@@ -60,12 +99,17 @@ MainWindow::MainWindow(QWidget *parent)
     // connect(ui->pushButton_13_clear, &QPushButton::clicked, this, &MainWindow::onMyButtonClickClear13);
     // connect(ui->pushButton_14_clear, &QPushButton::clicked, this, &MainWindow::onMyButtonClickClear14);
 
-    // connect(ui->pushButton_1_search, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearch_OwnerByCarId);
-    // connect(ui->pushButton_2_search, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearch_CarByOwner);
-    // connect(ui->pushButton_3_search, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearch_IsseuByOwner);
-    // connect(ui->pushButton_4_search, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearch_EmployeeByOwnerIssue);
-    // connect(ui->pushButton_5_search, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearch_CarByEmployee);
-    // connect(ui->pushButton_6_search, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearch_OwnerByIssue);
+    // EI
+    connect(ui->pushButton_1_add, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAdd_1);
+    connect(ui->pushButton_2_delete, &QPushButton::clicked, this, &MainWindow::onMyButtonClickDelete_2);
+    connect(ui->pushButton_3_search, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearch_3);
+
+    // CHEM_CLASS
+    connect(ui->pushButton_4_add, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAdd_4);
+    connect(ui->pushButton_5_delete, &QPushButton::clicked, this, &MainWindow::onMyButtonClickDelete_5);
+    connect(ui->pushButton_6_change, &QPushButton::clicked, this, &MainWindow::onMyButtonClickChange_6);
+    connect(ui->pushButton_7_class, &QPushButton::clicked, this, &MainWindow::onMyButtonClickClass_7);
+    connect(ui->pushButton_7_mainClass, &QPushButton::clicked, this, &MainWindow::onMyButtonClickMainClass_7);
 
     // connect(ui->pushButton_7_change, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAddClient);
     // connect(ui->pushButton_8_change, &QPushButton::clicked, this, &MainWindow::onMyButtonClickRemoveEmployee);
@@ -82,6 +126,151 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+void MainWindow::onComboBoxEI(const QString &text)
+{
+    int index = ui->comboBox_EI->findText(text);
+    if (index != -1) {
+        ui->stackedWidget_EI->setCurrentIndex(index);
+    }
+}
+
+void MainWindow::onComboBoxClass(const QString &text)
+{
+    int index = ui->comboBox_class->findText(text);
+    if (index != -1) {
+        ui->stackedWidget_class->setCurrentIndex(index);
+    }
+}
+
+void MainWindow::onComboBoxProd(const QString &text)
+{
+    int index = ui->comboBox_prod->findText(text);
+    if (index != -1) {
+        ui->stackedWidget_prod->setCurrentIndex(index);
+    }
+}
+
+void MainWindow::onComboBoxEnum(const QString &text)
+{
+    int index = ui->comboBox_enum->findText(text);
+    if (index != -1) {
+        ui->stackedWidget_enum->setCurrentIndex(index);
+    }
+}
+
+void MainWindow::onComboBoxParam(const QString &text)
+{
+    int index = ui->comboBox_param->findText(text);
+    if (index != -1) {
+        ui->stackedWidget_param->setCurrentIndex(index);
+    }
+}
+
+void MainWindow::setComboBoxEI()
+{
+    QSqlQuery query;
+    query.prepare("SELECT ID_EI, NAME "
+                  "FROM EI;");
+    if (query.exec()) {
+        while (query.next()) {
+            QString id_ei = query.value(0).toString();
+            QString name = query.value(1).toString();
+            QString combined = "ID = " + id_ei + " " + ": " + name;
+            ui->comboBox_4_idEI->addItem(combined);
+        }
+    }
+}
+
+void MainWindow::setComboBoxMainClass()
+{
+    QSqlQuery query;
+    query.prepare("SELECT ID_CLASS, NAME "
+                  "FROM CHEM_CLASS;");
+    if (query.exec()) {
+        while (query.next()) {
+            QString id_ei = query.value(0).toString();
+            QString name = query.value(1).toString();
+            QString combined = "ID = " + id_ei + " " + ": " + name;
+            ui->comboBox_4_mainClass->addItem(combined);
+            ui->comboBox_6_nameMainClass->addItem(combined);
+            ui->comboBox_7_mainClassName->addItem(combined);
+        }
+    }
+}
+
+void MainWindow::setComboBoxClass()
+{
+    QSqlQuery query;
+    query.prepare("SELECT ID_CLASS, NAME "
+                  "FROM CHEM_CLASS;");
+    if (query.exec()) {
+        while (query.next()) {
+            QString id_ei = query.value(0).toString();
+            QString name = query.value(1).toString();
+            QString combined = "ID = " + id_ei + " " + ": " + name;
+            ui->comboBox_5_classId->addItem(combined);
+            ui->comboBox_6_nameClass->addItem(combined);
+            ui->comboBox_7_className->addItem(combined);
+        }
+    }
+}
+
+void MainWindow::setComboBoxPrad()
+{
+
+}
+
+void MainWindow::setComboBoxEnum()
+{
+
+}
+
+void MainWindow::setComboBoxVal()
+{
+
+}
+
+void MainWindow::onMyButtonClickAdd_1()
+{
+
+}
+
+void MainWindow::onMyButtonClickDelete_2()
+{
+
+}
+
+void MainWindow::onMyButtonClickSearch_3()
+{
+
+}
+
+void MainWindow::onMyButtonClickAdd_4()
+{
+
+}
+
+void MainWindow::onMyButtonClickDelete_5()
+{
+
+}
+
+void MainWindow::onMyButtonClickChange_6()
+{
+
+}
+
+void MainWindow::onMyButtonClickClass_7()
+{
+
+}
+
+void MainWindow::onMyButtonClickMainClass_7()
+{
+
 }
 
 // void MainWindow::setComboBoxIssue()
@@ -215,13 +404,6 @@ MainWindow::~MainWindow()
 //     ui->lineEdit_14_number->clear();;
 // }
 
-// void MainWindow::onComboBoxSearchCurrentTextChanged(const QString &text)
-// {
-//     int index = ui->comboBox_EI->findText(text);
-//     if (index != -1) {
-//         ui->stackedWidget_EI->setCurrentIndex(index);
-//     }
-// }
 
 // void MainWindow::onComboBoxAddCurrentTextChanged(const QString &text)
 // {
