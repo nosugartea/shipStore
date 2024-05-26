@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "loginDialog.h"
+
 #include <QMainWindow>
 #include <QStackedWidget>
 #include <QComboBox>
@@ -22,11 +24,17 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+    Ui::MainWindow *ui;
+    LoginDialog *loginDialog;
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
+    void handleLogin();
+    void setTables();
+
     void onComboBoxEI(const QString &text);
     void onComboBoxClass(const QString &text);
     void onComboBoxProd(const QString &text);
@@ -35,10 +43,10 @@ private slots:
 
     void setComboBoxEI();
     void setComboBoxClass();
-    void setComboBoxMainClass();
-    void setComboBoxPrad();
+    void setComboBoxProd();
     void setComboBoxEnum();
     void setComboBoxVal();
+    void setComboBoxParam();
 
     // EI
     void onMyButtonClickAdd_1();
@@ -52,64 +60,90 @@ private slots:
     void onMyButtonClickClass_7();
     void onMyButtonClickMainClass_7();
 
+    void onComboBox4EI(const QString &text);
+    void onComboBox4MainClass(const QString &text);
+    void onComboBox5ClassId(const QString &text);
+    void onComboBox6NameClass(const QString &text);
+    void onComboBox6MainClass(const QString &text);
+    void onComboBox7Class(const QString &text);
+    void onComboBox7MainClass(const QString &text);
 
-    // void onComboBox4EI(const QString &text);
-    // void onComboBox4MainClass(const QString &text);
+    // PROD
+    void onMyButtonClickAdd_8();
+    void onMyButtonClickDelete_9();
+    void onMyButtonClickSearchClass_12();
+    void onMyButtonClickSearchAll_12();
 
-    // void onComboBox5ClassId(const QString &text);
+    void onComboBox8ClassId(const QString &text);
+    void onComboBox9ProdId(const QString &text);
+    void onComboBox12ClassName(const QString &text);
 
-    // void onComboBox6NameClass(const QString &text);
-    // void onComboBox6MainClass(const QString &text);
+    // ENUM
+    void onMyButtonClickAdd_13();
+    void onMyButtonClickDeleteEnum_14();
+    void onMyButtonClickDeleteVal_14();
+    void onMyButtonClickDown_17();
+    void onMyButtonClickUp_17();
+    void onMyButtonClickSearch_18();
 
-    // void onComboBox7ClassName(const QString &text);
-    // void onComboBox7MainClass(const QString &text);
+    void onComboBox13EnumId(const QString &text);
+    void onComboBox14EnumId(const QString &text);
+    void onComboBox14ValId(const QString &text);
+    void onComboBox17Down(const QString &text);
+    void onComboBox17Up(const QString &text);
+    void onComboBox18EnumId(const QString &text);
 
-//     void onComboBoxSearchCurrentIssue4TextChanged(const QString &text);
-//     void onComboBoxSearchCurrentIssue6TextChanged(const QString &text);
-//     void onComboBoxSearchCurrentTextChanged(const QString &text);
-//     void onComboBoxAddCurrentTextChanged(const QString &text);
+    // PARAM
+    void onMyButtonClickAdd_16();
+    void onMyButtonClickAdd_19();
+    void onMyButtonClickAdd_23();
+    void onMyButtonClickCopy_25();
+    void onMyButtonClickProd_26();
+    void onMyButtonClickSearch_26();
 
-//     void onComboBoxCurrentTextChangedCar12(const QString &text);
-//     void onComboBoxCurrentTextChangedCar13(const QString &text);
-//     void onComboBoxCurrentTextChangedEmployee13(const QString &text);
-//     void onComboBoxCurrentTextChangedIssue13(const QString &text);
+    void onComboBox16ClassId(const QString &text);
+    void onComboBox16ParamId(const QString &text);
+    void onComboBox19EI(const QString &text);
+    void onComboBox23EnumId(const QString &text);
+    void onComboBox23ParamId(const QString &text);
+    void onComboBox23ProdId(const QString &text);
+    void onComboBox25MainClass(const QString &text);
+    void onComboBox25ClassId(const QString &text);
+    void onComboBox26Prod(const QString &text);
+    void onComboBox26Class(const QString &text);
 
-//     void onMyButtonClickClear7();
-//     void onMyButtonClickClear8();
-//     void onMyButtonClickClear12();
-//     void onMyButtonClickClear13();
-//     void onMyButtonClickClear14();
-
-//     // search requests
-//     void onMyButtonClickSearch_OwnerByCarId();
-//     void onMyButtonClickSearch_CarByOwner();
-//     void onMyButtonClickSearch_IsseuByOwner();
-//     void onMyButtonClickSearch_EmployeeByOwnerIssue();
-//     void onMyButtonClickSearch_CarByEmployee();
-//     void onMyButtonClickSearch_OwnerByIssue();
-
-//     // change request
-//     void onMyButtonClickAddClient();
-//     void onMyButtonClickRemoveEmployee();
-//     void onMyButtonClickChangeCarCode();
-
-//     void onMyButtonClickAddCar();
-//     void onMyButtonClickAddRepair();
-//     void onMyButtonClickAddEmployee();
-
-//     // reports
-//     void onMyButtonClickMakeReportIssue();
-//     void onMyButtonClickMakeReportStation();
+    // clear buttons
+    void onClear4();
+    void onClear8();
 
 private:
-    Ui::MainWindow *ui;
     QString warnEmpty = "Обязательное поле!!";
-//     QString separator = "___________________________________________________________________________________________________________________________________________________";
-//     QString issue_4 = "";
-//     QString issue_6 = "";
-//     QString carNum_12 = "";
-//     QString issue_13 = "";
-//     QString employee_13 = "";
-//     QString carNum_13 = "";
+    QString idEI_4;
+    QString mainClass_4;
+    QString classId_5;
+    QString classId_6;
+    QString mainClass_6;
+    QString classId_7;
+    QString mainClass_7;
+    QString classId_8;
+    QString prodId_9;
+    QString classId_12;
+    QString idEnum_13;
+    QString idEnum_14;
+    QString idVal_14;
+    QString idDown_17;
+    QString idUp_17;
+    QString idEnum_18;
+
+    QString classId_16;
+    QString paramId_16;
+    QString idEI_19;
+    QString idEnum_23;
+    QString prodId_23;
+    QString paramId_23;
+    QString classId_25;
+    QString mainClass_25;
+    QString classId_26;
+    QString prodId_26;
 };
 #endif // MAINWINDOW_H

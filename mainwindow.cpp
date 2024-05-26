@@ -6,8 +6,12 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , loginDialog(new LoginDialog(this))
 {
     ui->setupUi(this);
+
+    connect(loginDialog, &LoginDialog::loginButtonClicked, this, &MainWindow::handleLogin);
+    loginDialog->exec();
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
     db.setHostName("localhost");
@@ -31,73 +35,20 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidget->setAutoFillBackground(true);
     ui->statusBar->setStyleSheet("background-color: rgba(35, 35, 51, 255); color: white;");
     
-    connect(ui->comboBox_EI, &QComboBox::currentTextChanged,
-             this, &MainWindow::onComboBoxEI);
-    connect(ui->comboBox_class, &QComboBox::currentTextChanged,
-             this, &MainWindow::onComboBoxClass);
-    connect(ui->comboBox_prod, &QComboBox::currentTextChanged,
-            this, &MainWindow::onComboBoxProd);
-    connect(ui->comboBox_enum, &QComboBox::currentTextChanged,
-            this, &MainWindow::onComboBoxEnum);
-    connect(ui->comboBox_param, &QComboBox::currentTextChanged,
-            this, &MainWindow::onComboBoxParam);
+    setTables();
+
+    connect(ui->comboBox_EI, &QComboBox::currentTextChanged, this, &MainWindow::onComboBoxEI);
+    connect(ui->comboBox_class, &QComboBox::currentTextChanged, this, &MainWindow::onComboBoxClass);
+    connect(ui->comboBox_prod, &QComboBox::currentTextChanged, this, &MainWindow::onComboBoxProd);
+    connect(ui->comboBox_enum, &QComboBox::currentTextChanged, this, &MainWindow::onComboBoxEnum);
+    connect(ui->comboBox_param, &QComboBox::currentTextChanged, this, &MainWindow::onComboBoxParam);
 
     setComboBoxEI();
     setComboBoxClass();
-    setComboBoxMainClass();
-    setComboBoxPrad();
+    setComboBoxProd();
     setComboBoxEnum();
     setComboBoxVal();
-
-    // connect(ui->comboBox_4_idEI, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBox4EI);
-
-    // void setComboBoxClass();
-    // connect(ui->comboBox_5_classId, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBox5ClassId);
-    // connect(ui->comboBox_6_nameClass, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBox6NameClass);
-    // connect(ui->comboBox_7_className, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBox7ClassName);
-
-    // void setComboBoxMainClass();
-    // connect(ui->comboBox_4_mainClass, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBox4MainClass);
-    // connect(ui->comboBox_6_nameMainClass, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBox6MainClass);
-    // connect(ui->comboBox_7_mainClassName, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBox7MainClass);
-
-    // void setComboBoxPrad();
-    // connect(ui->comboBox_5_classId, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBox5ClassId);
-
-    // void setComboBoxEnum();
-    // void setComboBoxVal();
-
-    // setComboBoxIssue();
-    // connect(ui->comboBox_4_issue, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBoxSearchCurrentIssue4TextChanged);
-    // connect(ui->comboBox_6_issue, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBoxSearchCurrentIssue6TextChanged);
-
-    // setComboBoxCarNum();
-    // connect(ui->comboBox_12_carNum, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBoxCurrentTextChangedCar12);
-
-    // setComboBoxEmployee();
-    // connect(ui->comboBox_13_carNum, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBoxCurrentTextChangedCar13);
-    // connect(ui->comboBox_13_employee, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBoxCurrentTextChangedEmployee13);
-    // connect(ui->comboBox_13_issue, &QComboBox::currentTextChanged,
-    //         this, &MainWindow::onComboBoxCurrentTextChangedIssue13);
-
-    // connect(ui->pushButton_7_clear, &QPushButton::clicked, this, &MainWindow::onMyButtonClickClear7);
-    // connect(ui->pushButton_8_clear, &QPushButton::clicked, this, &MainWindow::onMyButtonClickClear8);
-    // connect(ui->pushButton_12_clear, &QPushButton::clicked, this, &MainWindow::onMyButtonClickClear12);
-    // connect(ui->pushButton_13_clear, &QPushButton::clicked, this, &MainWindow::onMyButtonClickClear13);
-    // connect(ui->pushButton_14_clear, &QPushButton::clicked, this, &MainWindow::onMyButtonClickClear14);
+    setComboBoxParam();
 
     // EI
     connect(ui->pushButton_1_add, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAdd_1);
@@ -106,21 +57,113 @@ MainWindow::MainWindow(QWidget *parent)
 
     // CHEM_CLASS
     connect(ui->pushButton_4_add, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAdd_4);
+    connect(ui->comboBox_4_idEI, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox4EI);
+    connect(ui->comboBox_4_mainClass, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox4MainClass);
+
     connect(ui->pushButton_5_delete, &QPushButton::clicked, this, &MainWindow::onMyButtonClickDelete_5);
+    connect(ui->comboBox_5_classId, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox5ClassId);
+
     connect(ui->pushButton_6_change, &QPushButton::clicked, this, &MainWindow::onMyButtonClickChange_6);
+    connect(ui->comboBox_6_nameClass, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox6NameClass);
+    connect(ui->comboBox_6_nameMainClass, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox6MainClass);
+
     connect(ui->pushButton_7_class, &QPushButton::clicked, this, &MainWindow::onMyButtonClickClass_7);
+    connect(ui->comboBox_7_className, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox7Class);
     connect(ui->pushButton_7_mainClass, &QPushButton::clicked, this, &MainWindow::onMyButtonClickMainClass_7);
+    connect(ui->comboBox_7_mainClassName, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox7MainClass);
 
-    // connect(ui->pushButton_7_change, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAddClient);
-    // connect(ui->pushButton_8_change, &QPushButton::clicked, this, &MainWindow::onMyButtonClickRemoveEmployee);
-    // connect(ui->pushButton_9_change, &QPushButton::clicked, this, &MainWindow::onMyButtonClickChangeCarCode);
+    // PROD
+    connect(ui->pushButton_8_add, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAdd_8);
+    connect(ui->comboBox_8_classId, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox8ClassId);
 
-    // connect(ui->pushButton_12_change, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAddCar);
-    // connect(ui->pushButton_13_change, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAddRepair);
-    // connect(ui->pushButton_14_change, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAddEmployee);
+    connect(ui->pushButton_9_delete, &QPushButton::clicked, this, &MainWindow::onMyButtonClickDelete_9);
+    connect(ui->comboBox_9_idProd, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox9ProdId);
 
-    // connect(ui->pushButton_10_report, &QPushButton::clicked, this, &MainWindow::onMyButtonClickMakeReportIssue);
-    // connect(ui->pushButton_11_report, &QPushButton::clicked, this, &MainWindow::onMyButtonClickMakeReportStation);
+    connect(ui->pushButton_12_searchClass, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearchClass_12);
+    connect(ui->comboBox_12_className, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox12ClassName);
+    connect(ui->pushButton_12_searchAll, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearchAll_12);
+
+    // ENUM
+    connect(ui->pushButton_13_add, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAdd_13);
+    connect(ui->comboBox_13_idEnum, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox13EnumId);
+
+    connect(ui->pushButton_14_delete_enum, &QPushButton::clicked, this, &MainWindow::onMyButtonClickDeleteEnum_14);
+    connect(ui->comboBox_14_idEnum, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox14EnumId);
+    connect(ui->pushButton_14_deleteVal, &QPushButton::clicked, this, &MainWindow::onMyButtonClickDeleteVal_14);
+    connect(ui->comboBox_14_idVal, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox14ValId);
+
+    connect(ui->pushButton_17_down, &QPushButton::clicked, this, &MainWindow::onMyButtonClickDown_17);
+    connect(ui->comboBox_17_down, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox17Down);
+    connect(ui->pushButton_17_up, &QPushButton::clicked, this, &MainWindow::onMyButtonClickUp_17);
+    connect(ui->comboBox_17_up, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox17Up);
+
+    connect(ui->pushButton_18_search, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearch_18);
+    connect(ui->comboBox_18_idEnum, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox18EnumId);
+
+    // PARAM
+    connect(ui->pushButton_16_add, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAdd_16);
+    connect(ui->comboBox_16_idClass, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox16ClassId);
+    connect(ui->comboBox_16_idParam, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox16ParamId);
+
+    connect(ui->pushButton_19_add, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAdd_19);
+    connect(ui->comboBox_19_idEI, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox19EI);
+
+    connect(ui->pushButton_23_add, &QPushButton::clicked, this, &MainWindow::onMyButtonClickAdd_23);
+    connect(ui->comboBox_23_idEnum, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox23EnumId);
+    connect(ui->comboBox_23_idParam, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox23ParamId);
+    connect(ui->comboBox_23_idProd, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox23ProdId);
+
+    connect(ui->pushButton_25_copy, &QPushButton::clicked, this, &MainWindow::onMyButtonClickCopy_25);
+    connect(ui->comboBox_25_mainClass, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox25MainClass);
+    connect(ui->comboBox_25_class, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox25ClassId);
+
+    connect(ui->pushButton_26_prod, &QPushButton::clicked, this, &MainWindow::onMyButtonClickProd_26);
+    connect(ui->pushButton_26_search, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearch_26);
+    connect(ui->comboBox_26_idProd, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox26Prod);
+    connect(ui->comboBox_26_idClass, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox26Class);
+
+    // CLEAR BUTTON
+    connect(ui->pushButton_4_clear, &QPushButton::clicked, this, &MainWindow::onClear4);
+    connect(ui->pushButton_8_clear, &QPushButton::clicked, this, &MainWindow::onClear8);
+}
+
+void MainWindow::handleLogin() {
+    QString username = loginDialog->getUsername();
+    QString password = loginDialog->getPassword();
+
+    if (username == "admin" && password == "1234") {
+        ui->stackedWidget_EI->setCurrentIndex(0);
+        ui->stackedWidget_class->setCurrentIndex(0);
+        ui->stackedWidget_prod->setCurrentIndex(0);
+        ui->stackedWidget_enum->setCurrentIndex(0);
+        ui->stackedWidget_param->setCurrentIndex(0);
+    } else {
+        ui->stackedWidget_EI->setCurrentIndex(2);
+        ui->comboBox_EI->removeItem(0);
+        ui->comboBox_EI->removeItem(0);
+
+        ui->stackedWidget_class->setCurrentIndex(3);
+        ui->comboBox_class->removeItem(0);
+        ui->comboBox_class->removeItem(0);
+        ui->comboBox_class->removeItem(0);
+
+        ui->stackedWidget_prod->setCurrentIndex(2);
+        ui->comboBox_prod->removeItem(0);
+        ui->comboBox_prod->removeItem(0);
+
+        ui->stackedWidget_enum->setCurrentIndex(3);
+        ui->comboBox_enum->removeItem(0);
+        ui->comboBox_enum->removeItem(0);
+        ui->comboBox_enum->removeItem(0);
+
+        ui->stackedWidget_param->setCurrentIndex(6);
+        ui->comboBox_param->removeItem(0);
+        ui->comboBox_param->removeItem(0);
+        ui->comboBox_param->removeItem(0);
+        ui->comboBox_param->removeItem(0);
+        ui->comboBox_param->removeItem(0);
+        ui->comboBox_param->removeItem(0);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -128,6 +171,93 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setTables()
+{
+    QStringList headers;
+
+    ui->tableWidget_3_result->setRowCount(0);
+    ui->tableWidget_3_result->setColumnCount(4);
+    headers = {"ID", "Сокращение", "Название", "Код"};
+    ui->tableWidget_3_result->setHorizontalHeaderLabels(headers);
+    ui->tableWidget_3_result->setColumnWidth(0, 50);
+    ui->tableWidget_3_result->setColumnWidth(1, 100);
+    ui->tableWidget_3_result->setColumnWidth(2, 150);
+    ui->tableWidget_3_result->setColumnWidth(3, 50);
+
+    ui->tableWidget_7_class->setRowCount(0);
+    ui->tableWidget_7_class->setColumnCount(5);
+    headers = {"ID род.", "Сокр", "Название", "ЕИ", "Род. класс"};
+    ui->tableWidget_7_class->setHorizontalHeaderLabels(headers);
+    ui->tableWidget_7_class->setColumnWidth(0, 50);
+    ui->tableWidget_7_class->setColumnWidth(1, 80);
+    ui->tableWidget_7_class->setColumnWidth(2, 100);
+    ui->tableWidget_7_class->setColumnWidth(3, 50);
+    ui->tableWidget_7_class->setColumnWidth(4, 50);
+
+    ui->tableWidget_7_mainClass->setRowCount(0);
+    ui->tableWidget_7_mainClass->setColumnCount(5);
+    headers = {"ID насл.", "Сокращение", "Название", "ЕИ", "Род. класс"};
+    ui->tableWidget_7_mainClass->setHorizontalHeaderLabels(headers);
+    ui->tableWidget_7_mainClass->setColumnWidth(0, 50);
+    ui->tableWidget_7_mainClass->setColumnWidth(1, 80);
+    ui->tableWidget_7_mainClass->setColumnWidth(2, 100);
+    ui->tableWidget_7_mainClass->setColumnWidth(3, 50);
+    ui->tableWidget_7_mainClass->setColumnWidth(4, 50);
+
+    ui->tableWidget_12_resultClass->setRowCount(0);
+    ui->tableWidget_12_resultClass->setColumnCount(3);
+    headers = {"ID", "Сокращение", "Название"};
+    ui->tableWidget_12_resultClass->setHorizontalHeaderLabels(headers);
+    ui->tableWidget_12_resultClass->setColumnWidth(0, 50);
+    ui->tableWidget_12_resultClass->setColumnWidth(1, 100);
+    ui->tableWidget_12_resultClass->setColumnWidth(2, 200);
+
+    ui->tableWidget_12_result_all->setRowCount(0);
+    ui->tableWidget_12_result_all->setColumnCount(4);
+    headers = {"ID", "Сокращение", "Название", "Класс"};
+    ui->tableWidget_12_result_all->setHorizontalHeaderLabels(headers);
+    ui->tableWidget_12_result_all->setColumnWidth(0, 50);
+    ui->tableWidget_12_result_all->setColumnWidth(1, 100);
+    ui->tableWidget_12_result_all->setColumnWidth(2, 150);
+    ui->tableWidget_12_result_all->setColumnWidth(3, 50);
+
+
+    ui->tableWidget_18_result->setRowCount(0);
+    ui->tableWidget_18_result->setColumnCount(5);
+    headers = {"ID", "Номер", "Сокращение", "Название", "Значение"};
+    ui->tableWidget_18_result->setHorizontalHeaderLabels(headers);
+    ui->tableWidget_18_result->setColumnWidth(0, 50);
+    ui->tableWidget_18_result->setColumnWidth(1, 50);
+    ui->tableWidget_18_result->setColumnWidth(2, 100);
+    ui->tableWidget_18_result->setColumnWidth(3, 150);
+    ui->tableWidget_18_result->setColumnWidth(4, 450);
+
+    ui->tableWidget_26_prod->setRowCount(0);
+    ui->tableWidget_26_prod->setColumnCount(9);
+    headers = {"ID пары", "Сокращ", "Название", "Числовое зн.", "ЕИ", "Строк. знач.", "ID переч", "Значение", "OBLOB"};
+    ui->tableWidget_26_prod->setHorizontalHeaderLabels(headers);
+    ui->tableWidget_26_prod->setColumnWidth(0, 50);
+    ui->tableWidget_26_prod->setColumnWidth(1, 50);
+    ui->tableWidget_26_prod->setColumnWidth(2, 160);
+    ui->tableWidget_26_prod->setColumnWidth(3, 150);
+    ui->tableWidget_26_prod->setColumnWidth(4, 50);
+    ui->tableWidget_26_prod->setColumnWidth(5, 60);
+    ui->tableWidget_26_prod->setColumnWidth(6, 150);
+    ui->tableWidget_26_prod->setColumnWidth(7, 50);
+    ui->tableWidget_26_prod->setColumnWidth(8, 130);
+
+    ui->tableWidget_26_search->setRowCount(0);
+    ui->tableWidget_26_search->setColumnCount(7);
+    headers = {"ID пары", "Сокращ", "Название", "Мин. зн.", "Макс. зн.", "ЕИ", "Название ЕИ"};
+    ui->tableWidget_26_search->setHorizontalHeaderLabels(headers);
+    ui->tableWidget_26_search->setColumnWidth(0, 50);
+    ui->tableWidget_26_search->setColumnWidth(1, 100);
+    ui->tableWidget_26_search->setColumnWidth(2, 330);
+    ui->tableWidget_26_search->setColumnWidth(3, 100);
+    ui->tableWidget_26_search->setColumnWidth(4, 100);
+    ui->tableWidget_26_search->setColumnWidth(5, 50);
+    ui->tableWidget_26_search->setColumnWidth(6, 120);
+}
 
 void MainWindow::onComboBoxEI(const QString &text)
 {
@@ -143,6 +273,8 @@ void MainWindow::onComboBoxClass(const QString &text)
     if (index != -1) {
         ui->stackedWidget_class->setCurrentIndex(index);
     }
+    setComboBoxEI();
+    setComboBoxClass();
 }
 
 void MainWindow::onComboBoxProd(const QString &text)
@@ -151,6 +283,8 @@ void MainWindow::onComboBoxProd(const QString &text)
     if (index != -1) {
         ui->stackedWidget_prod->setCurrentIndex(index);
     }
+    setComboBoxClass();
+    setComboBoxProd();
 }
 
 void MainWindow::onComboBoxEnum(const QString &text)
@@ -159,6 +293,7 @@ void MainWindow::onComboBoxEnum(const QString &text)
     if (index != -1) {
         ui->stackedWidget_enum->setCurrentIndex(index);
     }
+    setComboBoxEnum();
 }
 
 void MainWindow::onComboBoxParam(const QString &text)
@@ -171,66 +306,638 @@ void MainWindow::onComboBoxParam(const QString &text)
 
 void MainWindow::setComboBoxEI()
 {
+    ui->comboBox_4_idEI->clear();
+    ui->comboBox_19_idEI->clear();
+
     QSqlQuery query;
-    query.prepare("SELECT ID_EI, NAME "
-                  "FROM EI;");
+    query.prepare("SELECT ID_EI, NAME FROM EI ORDER BY ID_EI;");
     if (query.exec()) {
         while (query.next()) {
             QString id_ei = query.value(0).toString();
             QString name = query.value(1).toString();
             QString combined = "ID = " + id_ei + " " + ": " + name;
             ui->comboBox_4_idEI->addItem(combined);
+            ui->comboBox_19_idEI->addItem(combined);
         }
-    }
-}
-
-void MainWindow::setComboBoxMainClass()
-{
-    QSqlQuery query;
-    query.prepare("SELECT ID_CLASS, NAME "
-                  "FROM CHEM_CLASS;");
-    if (query.exec()) {
-        while (query.next()) {
-            QString id_ei = query.value(0).toString();
-            QString name = query.value(1).toString();
-            QString combined = "ID = " + id_ei + " " + ": " + name;
-            ui->comboBox_4_mainClass->addItem(combined);
-            ui->comboBox_6_nameMainClass->addItem(combined);
-            ui->comboBox_7_mainClassName->addItem(combined);
+        idEI_4 = ui->comboBox_4_idEI->itemText(0);
+        static const QRegularExpression re1("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re1.match(idEI_4);
+        if (match.hasMatch()) {
+            idEI_4 = match.captured(1);
+        }
+        idEI_19 = ui->comboBox_19_idEI->itemText(0);
+        static const QRegularExpression re2("ID\\s*=\\s*(\\d+)");
+        match = re2.match(idEI_19);
+        if (match.hasMatch()) {
+            idEI_19 = match.captured(1);
         }
     }
 }
 
 void MainWindow::setComboBoxClass()
 {
+    ui->comboBox_4_mainClass->clear();
+    ui->comboBox_6_nameMainClass->clear();
+    ui->comboBox_7_mainClassName->clear();
+    ui->comboBox_5_classId->clear();
+    ui->comboBox_6_nameClass->clear();
+    ui->comboBox_7_className->clear();
+    ui->comboBox_8_classId->clear();
+    ui->comboBox_12_className->clear();
+    ui->comboBox_16_idClass->clear();
+    ui->comboBox_25_class->clear();
+    ui->comboBox_25_mainClass->clear();
+    ui->comboBox_26_idClass->clear();
+
+    ui->comboBox_4_mainClass->addItem("Нет родительского класса");
+    ui->comboBox_6_nameMainClass->addItem("Нет родительского класса");
+    // ui->comboBox_7_mainClassName->addItem("Нет родительского класса");
     QSqlQuery query;
-    query.prepare("SELECT ID_CLASS, NAME "
-                  "FROM CHEM_CLASS;");
+    query.prepare("SELECT ID_CLASS, NAME FROM CHEM_CLASS ORDER BY ID_CLASS;");
     if (query.exec()) {
         while (query.next()) {
             QString id_ei = query.value(0).toString();
             QString name = query.value(1).toString();
             QString combined = "ID = " + id_ei + " " + ": " + name;
+
+            ui->comboBox_4_mainClass->addItem(combined);
+            ui->comboBox_6_nameMainClass->addItem(combined);
+            ui->comboBox_7_mainClassName->addItem(combined);
             ui->comboBox_5_classId->addItem(combined);
             ui->comboBox_6_nameClass->addItem(combined);
             ui->comboBox_7_className->addItem(combined);
+            ui->comboBox_8_classId->addItem(combined);
+            ui->comboBox_12_className->addItem(combined);
+            ui->comboBox_16_idClass->addItem(combined);
+            ui->comboBox_25_class->addItem(combined);
+            ui->comboBox_25_mainClass->addItem(combined);
+            ui->comboBox_26_idClass->addItem(combined);
+        }
+        mainClass_4 = ui->comboBox_4_mainClass->itemText(0);
+        static const QRegularExpression re1("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re1.match(mainClass_4);
+        if (match.hasMatch()) {
+            mainClass_4 = match.captured(1);
+        }
+        classId_5 = ui->comboBox_5_classId->itemText(0);
+        static const QRegularExpression re2("ID\\s*=\\s*(\\d+)");
+        match = re2.match(classId_5);
+        if (match.hasMatch()) {
+            classId_5 = match.captured(1);
+        }
+        classId_6 = ui->comboBox_6_nameClass->itemText(0);
+        static const QRegularExpression re3("ID\\s*=\\s*(\\d+)");
+        match = re3.match(classId_6);
+        if (match.hasMatch()) {
+            classId_6 = match.captured(1);
+        }
+        mainClass_6 = ui->comboBox_6_nameMainClass->itemText(0);
+        static const QRegularExpression re4("ID\\s*=\\s*(\\d+)");
+        match = re4.match(mainClass_6);
+        if (match.hasMatch()) {
+            mainClass_6 = match.captured(1);
+        }
+        classId_7 = ui->comboBox_7_className->itemText(0);
+        static const QRegularExpression re5("ID\\s*=\\s*(\\d+)");
+        match = re5.match(classId_7);
+        if (match.hasMatch()) {
+            classId_7 = match.captured(1);
+        }
+        mainClass_7 = ui->comboBox_7_mainClassName->itemText(0);
+        static const QRegularExpression re6("ID\\s*=\\s*(\\d+)");
+        match = re6.match(mainClass_7);
+        if (match.hasMatch()) {
+            mainClass_7 = match.captured(1);
+        }
+        classId_8 = ui->comboBox_8_classId->itemText(0);
+        static const QRegularExpression re7("ID\\s*=\\s*(\\d+)");
+        match = re7.match(classId_8);
+        if (match.hasMatch()) {
+            classId_8 = match.captured(1);
+        }
+        classId_12 = ui->comboBox_12_className->itemText(0);
+        static const QRegularExpression re8("ID\\s*=\\s*(\\d+)");
+        match = re8.match(classId_12);
+        if (match.hasMatch()) {
+            classId_12 = match.captured(1);
+        }
+        classId_16 = ui->comboBox_16_idClass->itemText(0);
+        static const QRegularExpression re9("ID\\s*=\\s*(\\d+)");
+        match = re9.match(classId_16);
+        if (match.hasMatch()) {
+            classId_16 = match.captured(1);
+        }
+        classId_25 = ui->comboBox_25_class->itemText(0);
+        static const QRegularExpression re11("ID\\s*=\\s*(\\d+)");
+        match = re11.match(classId_25);
+        if (match.hasMatch()) {
+            classId_25 = match.captured(1);
+        }
+        mainClass_25 = ui->comboBox_25_mainClass->itemText(0);
+        static const QRegularExpression re12("ID\\s*=\\s*(\\d+)");
+        match = re12.match(mainClass_25);
+        if (match.hasMatch()) {
+            mainClass_25 = match.captured(1);
+        }
+        classId_26 = ui->comboBox_26_idClass->itemText(0);
+        static const QRegularExpression re13("ID\\s*=\\s*(\\d+)");
+        match = re13.match(classId_26);
+        if (match.hasMatch()) {
+            classId_26 = match.captured(1);
         }
     }
 }
 
-void MainWindow::setComboBoxPrad()
+void MainWindow::setComboBoxProd()
 {
+    ui->comboBox_9_idProd->clear();
+    ui->comboBox_23_idProd->clear();
+    ui->comboBox_26_idProd->clear();
 
+    QSqlQuery query;
+    query.prepare("SELECT ID_PROD, NAME FROM PROD ORDER BY ID_PROD;");
+    if (query.exec()) {
+        while (query.next()) {
+            QString id_prod = query.value(0).toString();
+            QString name = query.value(1).toString();
+            QString combined = "ID = " + id_prod + " " + ": " + name;
+            ui->comboBox_9_idProd->addItem(combined);
+            ui->comboBox_23_idProd->addItem(combined);
+            ui->comboBox_26_idProd->addItem(combined);
+        }
+        prodId_9 = ui->comboBox_9_idProd->itemText(0);
+        static const QRegularExpression re1("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re1.match(prodId_9);
+        if (match.hasMatch()) {
+            prodId_9 = match.captured(1);
+        }
+        prodId_23 = ui->comboBox_23_idProd->itemText(0);
+        static const QRegularExpression re3("ID\\s*=\\s*(\\d+)");
+        match = re3.match(prodId_23);
+        if (match.hasMatch()) {
+            prodId_23 = match.captured(1);
+        }
+        prodId_26 = ui->comboBox_26_idProd->itemText(0);
+        static const QRegularExpression re5("ID\\s*=\\s*(\\d+)");
+        match = re5.match(prodId_26);
+        if (match.hasMatch()) {
+            prodId_26 = match.captured(1);
+        }
+    }
 }
 
 void MainWindow::setComboBoxEnum()
 {
+    ui->comboBox_13_idEnum->clear();
+    ui->comboBox_14_idEnum->clear();
+    ui->comboBox_18_idEnum->clear();
+    ui->comboBox_23_idEnum->clear();
 
+    QSqlQuery query;
+    query.prepare("SELECT ID_CLASS, NAME FROM CHEM_CLASS ORDER BY ID_CLASS;");
+    if (query.exec()) {
+        while (query.next()) {
+            QString id_ei = query.value(0).toString();
+            QString name = query.value(1).toString();
+            QString combined = "ID = " + id_ei + " " + ": " + name;
+            if (id_ei.toInt() > 19 && id_ei.toInt() < 28) {
+                ui->comboBox_13_idEnum->addItem(combined);
+                ui->comboBox_14_idEnum->addItem(combined);
+                ui->comboBox_18_idEnum->addItem(combined);
+                ui->comboBox_23_idEnum->addItem(combined);
+            }
+        }
+        idEnum_13 = ui->comboBox_13_idEnum->itemText(0);
+        static const QRegularExpression re1("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re1.match(idEnum_13);
+        if (match.hasMatch()) {
+            idEnum_13 = match.captured(1);
+        }
+        idEnum_14 = ui->comboBox_14_idEnum->itemText(0);
+        static const QRegularExpression re2("ID\\s*=\\s*(\\d+)");
+        match = re2.match(idEnum_14);
+        if (match.hasMatch()) {
+            idEnum_14 = match.captured(1);
+        }
+        idEnum_18 = ui->comboBox_18_idEnum->itemText(0);
+        static const QRegularExpression re3("ID\\s*=\\s*(\\d+)");
+        match = re3.match(idEnum_18);
+        if (match.hasMatch()) {
+            idEnum_18 = match.captured(1);
+        }
+        idEnum_23 = ui->comboBox_23_idEnum->itemText(0);
+        static const QRegularExpression re4("ID\\s*=\\s*(\\d+)");
+        match = re4.match(idEnum_23);
+        if (match.hasMatch()) {
+            idEnum_23 = match.captured(1);
+        }
+    }
 }
 
 void MainWindow::setComboBoxVal()
 {
+    ui->comboBox_14_idVal->clear();
+    ui->comboBox_17_down->clear();
+    ui->comboBox_17_up->clear();
+    QSqlQuery query;
+    query.prepare("SELECT ID_POS, E_NAME "
+                  "FROM POS_ENUM ORDER BY ID_POS, ID_ENUM;");
+    if (query.exec()) {
+        while (query.next()) {
+            QString id_pos = query.value(0).toString();
+            QString name = query.value(1).toString();
+            QString combined = "ID = " + id_pos + ": " + name;
+            ui->comboBox_14_idVal->addItem(combined);
+            ui->comboBox_17_down->addItem(combined);
+            ui->comboBox_17_up->addItem(combined);
+        }
+        idVal_14 = ui->comboBox_14_idVal->itemText(0);
+        static const QRegularExpression re1("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re1.match(idVal_14);
+        if (match.hasMatch()) {
+            idVal_14 = match.captured(1);
+        }
+        idDown_17 = ui->comboBox_17_down->itemText(0);
+        static const QRegularExpression re2("ID\\s*=\\s*(\\d+)");
+        match = re2.match(idDown_17);
+        if (match.hasMatch()) {
+            idDown_17 = match.captured(1);
+        }
+        idUp_17 = ui->comboBox_17_up->itemText(0);
+        static const QRegularExpression re3("ID\\s*=\\s*(\\d+)");
+        match = re3.match(idUp_17);
+        if (match.hasMatch()) {
+            idUp_17 = match.captured(1);
+        }
+    }
+}
 
+void MainWindow::setComboBoxParam()
+{
+    ui->comboBox_16_idParam->clear();
+    ui->comboBox_23_idParam->clear();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM PARAMETR1 ORDER BY ID_PAR;");
+    if (query.exec()) {
+        while (query.next()) {
+            QString id_pos = query.value(0).toString();
+            QString name = query.value(2).toString();
+            QString combined = "ID = " + id_pos + ": " + name;
+            ui->comboBox_16_idParam->addItem(combined);
+            ui->comboBox_23_idParam->addItem(combined);
+        }
+        paramId_16 = ui->comboBox_16_idParam->itemText(0);
+        static const QRegularExpression re1("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re1.match(paramId_16);
+        if (match.hasMatch()) {
+            paramId_16 = match.captured(1);
+        }
+        paramId_23 = ui->comboBox_23_idParam->itemText(0);
+        static const QRegularExpression re3("ID\\s*=\\s*(\\d+)");
+        match = re3.match(paramId_23);
+        if (match.hasMatch()) {
+            paramId_23 = match.captured(1);
+        }
+    }
+}
+
+
+void MainWindow::onComboBox4EI(const QString &text)
+{
+    int index = ui->comboBox_4_idEI->findText(text);
+    if (index != -1) {
+        idEI_4 = ui->comboBox_4_idEI->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(idEI_4);
+        if (match.hasMatch()) {
+            idEI_4 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox4MainClass(const QString &text)
+{
+    int index = ui->comboBox_4_mainClass->findText(text);
+    if (index != -1) {
+        mainClass_4 = ui->comboBox_4_mainClass->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(mainClass_4);
+        if (match.hasMatch()) {
+            mainClass_4 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox5ClassId(const QString &text)
+{
+    int index = ui->comboBox_5_classId->findText(text);
+    if (index != -1) {
+        classId_5 = ui->comboBox_5_classId->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(classId_5);
+        if (match.hasMatch()) {
+            classId_5 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox6NameClass(const QString &text)
+{
+    int index = ui->comboBox_6_nameClass->findText(text);
+    if (index != -1) {
+        classId_6 = ui->comboBox_6_nameClass->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(classId_6);
+        if (match.hasMatch()) {
+            classId_6 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox6MainClass(const QString &text)
+{
+    int index = ui->comboBox_6_nameMainClass->findText(text);
+    if (index != -1) {
+        mainClass_6 = ui->comboBox_6_nameMainClass->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(mainClass_6);
+        if (match.hasMatch()) {
+            mainClass_6 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox7Class(const QString &text)
+{
+    int index = ui->comboBox_7_className->findText(text);
+    if (index != -1) {
+        classId_7 = ui->comboBox_7_className->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(classId_7);
+        if (match.hasMatch()) {
+            classId_7 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox7MainClass(const QString &text)
+{
+    int index = ui->comboBox_7_mainClassName->findText(text);
+    if (index != -1) {
+        mainClass_7 = ui->comboBox_7_mainClassName->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(mainClass_7);
+        if (match.hasMatch()) {
+            mainClass_7 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox8ClassId(const QString &text)
+{
+    int index = ui->comboBox_8_classId->findText(text);
+    if (index != -1) {
+        classId_8 = ui->comboBox_8_classId->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(classId_8);
+        if (match.hasMatch()) {
+            classId_8 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox9ProdId(const QString &text)
+{
+    int index = ui->comboBox_9_idProd->findText(text);
+    if (index != -1) {
+        prodId_9 = ui->comboBox_9_idProd->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(prodId_9);
+        if (match.hasMatch()) {
+            prodId_9 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox12ClassName(const QString &text)
+{
+    int index = ui->comboBox_12_className->findText(text);
+    if (index != -1) {
+        classId_12 = ui->comboBox_12_className->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(classId_12);
+        if (match.hasMatch()) {
+            classId_12 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox13EnumId(const QString &text)
+{
+    int index = ui->comboBox_13_idEnum->findText(text);
+    if (index != -1) {
+        idEnum_13 = ui->comboBox_13_idEnum->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(idEnum_13);
+        if (match.hasMatch()) {
+            idEnum_13 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox14EnumId(const QString &text)
+{
+    int index = ui->comboBox_14_idEnum->findText(text);
+    if (index != -1) {
+        idEnum_14 = ui->comboBox_14_idEnum->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(idEnum_14);
+        if (match.hasMatch()) {
+            idEnum_14 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox14ValId(const QString &text)
+{
+    int index = ui->comboBox_14_idVal->findText(text);
+    if (index != -1) {
+        idVal_14 = ui->comboBox_14_idVal->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(idVal_14);
+        if (match.hasMatch()) {
+            idVal_14 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox17Down(const QString &text)
+{
+    int index = ui->comboBox_17_down->findText(text);
+    if (index != -1) {
+        idDown_17 = ui->comboBox_17_down->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(idDown_17);
+        if (match.hasMatch()) {
+            idDown_17 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox17Up(const QString &text)
+{
+    int index = ui->comboBox_17_up->findText(text);
+    if (index != -1) {
+        idUp_17 = ui->comboBox_17_up->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(idUp_17);
+        if (match.hasMatch()) {
+            idUp_17 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox18EnumId(const QString &text)
+{
+    int index = ui->comboBox_18_idEnum->findText(text);
+    if (index != -1) {
+        idEnum_18 = ui->comboBox_18_idEnum->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(idEnum_18);
+        if (match.hasMatch()) {
+            idEnum_18 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox16ClassId(const QString &text)
+{
+    int index = ui->comboBox_16_idClass->findText(text);
+    if (index != -1) {
+        classId_16 = ui->comboBox_16_idClass->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(classId_16);
+        if (match.hasMatch()) {
+            classId_16 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox16ParamId(const QString &text)
+{
+    int index = ui->comboBox_16_idParam->findText(text);
+    if (index != -1) {
+        paramId_16 = ui->comboBox_16_idParam->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(paramId_16);
+        if (match.hasMatch()) {
+            paramId_16 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox19EI(const QString &text)
+{
+    int index = ui->comboBox_19_idEI->findText(text);
+    if (index != -1) {
+        idEI_19 = ui->comboBox_19_idEI->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(idEI_19);
+        if (match.hasMatch()) {
+            idEI_19 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox23EnumId(const QString &text)
+{
+    int index = ui->comboBox_23_idEnum->findText(text);
+    if (index != -1) {
+        idEnum_23 = ui->comboBox_23_idEnum->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(idEnum_23);
+        if (match.hasMatch()) {
+            idEnum_23 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox23ProdId(const QString &text)
+{
+    int index = ui->comboBox_23_idProd->findText(text);
+    if (index != -1) {
+        prodId_23 = ui->comboBox_23_idProd->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(prodId_23);
+        if (match.hasMatch()) {
+            prodId_23 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox23ParamId(const QString &text)
+{
+    int index = ui->comboBox_23_idParam->findText(text);
+    if (index != -1) {
+        paramId_23 = ui->comboBox_23_idParam->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(paramId_23);
+        if (match.hasMatch()) {
+            paramId_23 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox25MainClass(const QString &text)
+{
+    int index = ui->comboBox_25_mainClass->findText(text);
+    if (index != -1) {
+        mainClass_25 = ui->comboBox_25_mainClass->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(mainClass_25);
+        if (match.hasMatch()) {
+            mainClass_25 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox25ClassId(const QString &text)
+{
+    int index = ui->comboBox_25_class->findText(text);
+    if (index != -1) {
+        classId_25 = ui->comboBox_25_class->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(classId_25);
+        if (match.hasMatch()) {
+            classId_25 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox26Prod(const QString &text)
+{
+    int index = ui->comboBox_26_idProd->findText(text);
+    if (index != -1) {
+        prodId_26 = ui->comboBox_26_idProd->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(prodId_26);
+        if (match.hasMatch()) {
+            prodId_26 = match.captured(1);
+        }
+    }
+}
+
+void MainWindow::onComboBox26Class(const QString &text)
+{
+    int index = ui->comboBox_26_idClass->findText(text);
+    if (index != -1) {
+        classId_26 = ui->comboBox_26_idClass->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(classId_26);
+        if (match.hasMatch()) {
+            classId_26 = match.captured(1);
+        }
+    }
 }
 
 void MainWindow::onMyButtonClickAdd_1()
@@ -245,12 +952,11 @@ void MainWindow::onMyButtonClickAdd_1()
     if (name.isEmpty() || name == warnEmpty) {
         ui->lineEdit_1_name->setText(warnEmpty);
     }
-    if (shortName.isEmpty() || shortName == warnEmpty) {
-        ui->lineEdit_1_shortName->setText(warnEmpty);
+    if (shortName.isEmpty()) {
+        shortName = "NULL";
     }
     if ((!code.isEmpty() && code != warnEmpty) &&
-        (!name.isEmpty() && name != warnEmpty) &&
-        (!shortName.isEmpty() && shortName != warnEmpty)){
+        (!name.isEmpty() && name != warnEmpty)){
         QSqlQuery query;
         query.prepare("SELECT * FROM INS_EI(:pCode, :pShortName, :pName);");
         query.bindValue(":pCode", code);
@@ -259,14 +965,12 @@ void MainWindow::onMyButtonClickAdd_1()
 
         if (query.exec()) {
             while (query.next()) {
-                QSqlRecord record = query.record();
-                QString result_out = "";
-                for (int i = 0; i < record.count(); ++i) {
-                    result_out = record.value(i).toString();
-                }
+                QString result_out = query.value(0).toString();
                 if (result_out == "1")
                 {
                     ui->textEdit_1_result->insertPlainText("Запись успешно создана.\n");
+                } else if (result_out == "0") {
+                    ui->textEdit_1_result->insertPlainText("Ошибка добавления.\n");
                 }
             }
         }
@@ -287,14 +991,12 @@ void MainWindow::onMyButtonClickDelete_2()
 
         if (query.exec()) {
             while (query.next()) {
-                QSqlRecord record = query.record();
-                QString result_out = "";
-                for (int i = 0; i < record.count(); ++i) {
-                    result_out = record.value(i).toString();
-                }
+                QString result_out = query.value(0).toString();
                 if (result_out == "1")
                 {
                     ui->textEdit_2_result->insertPlainText("Запись успешно удалена.\n");
+                } else if (result_out == "0") {
+                    ui->textEdit_2_result->insertPlainText("Ошибка удаления.\n");
                 }
             }
         }
@@ -303,818 +1005,590 @@ void MainWindow::onMyButtonClickDelete_2()
 
 void MainWindow::onMyButtonClickSearch_3()
 {
-    ui->textEdit_3_searchResult->clear();
+    ui->tableWidget_3_result->setRowCount(0);
+    int rowCount = 0;
 
     QSqlQuery query;
     query.prepare("SELECT * FROM EI ORDER BY ID_EI;");
-
     if (query.exec()) {
         while (query.next()) {
             QSqlRecord record = query.record();
-            QString result_out = "";
+            ui->tableWidget_3_result->insertRow(rowCount);
+            ui->tableWidget_3_result->setRowHeight(rowCount, 30);
             for (int i = 0; i < record.count(); ++i) {
-                result_out += record.value(i).toString() + " - ";
+                qDebug() << i;
+                QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                ui->tableWidget_3_result->setItem(rowCount, i, item);
             }
-            ui->textEdit_3_searchResult->insertPlainText(result_out + '\n');
+            ++rowCount;
         }
     }
 }
 
 void MainWindow::onMyButtonClickAdd_4()
 {
+    ui->textEdit_4_result->clear();
+    QString name = ui->lineEdit_4_nameClass->text();
+    QString shortName = ui->lineEdit_4_shortName->text();
+    if (name.isEmpty() || name == warnEmpty) {
+        ui->lineEdit_4_nameClass->setText(warnEmpty);
+    }
+    if (shortName.isEmpty()) {
+        shortName = "NULL";
+    }
+    if ((!name.isEmpty() && name != warnEmpty)){
+        QSqlQuery query;
+        query.prepare("SELECT * FROM ADD_CHEM_CLASS(:pShortName, :pName, :pBaseEI, :pMainClass);");
+        query.bindValue(":pShortName", shortName);
+        query.bindValue(":pName", name);
+        query.bindValue(":pBaseEI", idEI_4);
+        query.bindValue(":pMainClass", mainClass_4);
 
+        if (query.exec()) {
+            while (query.next()) {
+                QString id_class = query.value(0).toString();
+                QString result_out = query.value(1).toString();
+                if (result_out == "1")
+                {
+                    ui->textEdit_4_result->insertPlainText("Запись успешно создана. Новый ID = " +id_class + "\n");
+                } else if (result_out == "0") {
+                    ui->textEdit_4_result->insertPlainText("Ошибка создания.\n");
+                }
+            }
+        }
+    }
 }
 
 void MainWindow::onMyButtonClickDelete_5()
 {
-
+    ui->textEdit_5_result->clear();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM DELETE_CHEM_CLASS(:pName);");
+    query.bindValue(":pName", classId_5);
+    if (query.exec()) {
+        while (query.next()) {
+            QString result_out = query.value(0).toString();
+            if (result_out == "1")
+            {
+                ui->textEdit_5_result->insertPlainText("Запись успешно удалена.\n");
+            } else if (result_out == "0") {
+                ui->textEdit_5_result->insertPlainText("Ошибка удаления.\n");
+            }
+        }
+    }
 }
 
 void MainWindow::onMyButtonClickChange_6()
 {
-
+    ui->textEdit_6_result->clear();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM CHANGE_PARENT_CHEM_CLASS(:pIdClass, :pNewMainClass);");
+    query.bindValue(":pIdClass", classId_6);
+    query.bindValue(":pNewMainClass", mainClass_6);
+    if (query.exec()) {
+        while (query.next()) {
+            QString result_out = query.value(0).toString();
+            if (result_out == "1")
+            {
+                ui->textEdit_6_result->insertPlainText("Родительский класс успешно изменен.\n");
+            } else if (result_out == "0") {
+                ui->textEdit_6_result->insertPlainText("Ошибка внесения изменений в БД.\n");
+            } else if (result_out == "2") {
+                ui->textEdit_6_result->insertPlainText("Ошибка внесения изменений в БД. Вы хотите сделать цикл.\n");
+            }
+        }
+    }
 }
 
 void MainWindow::onMyButtonClickClass_7()
 {
-
+    ui->tableWidget_7_class->setRowCount(0);
+    QSqlQuery query;
+    query.prepare("SELECT * FROM FIND_PARENT(:pIdClass);");
+    query.bindValue(":pIdClass", classId_7);
+    if (query.exec()) {
+        while (query.next()) {
+            ui->tableWidget_7_class->insertRow(0);
+            ui->tableWidget_7_class->setRowHeight(0, 30);
+            QSqlRecord record = query.record();
+            for (int i = 0; i < record.count(); ++i) {
+                QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                ui->tableWidget_7_class->setItem(0, i, item);
+            }
+        }
+    }
 }
 
 void MainWindow::onMyButtonClickMainClass_7()
 {
+    ui->tableWidget_7_mainClass->setRowCount(0);
+    int rowCount = 0;
 
+    if (mainClass_7 == "Нет родительского класса") {
+        return;
+    }
+    QSqlQuery query;
+    query.prepare("SELECT * FROM FIND_CHILD(:pIdClass);");
+    query.bindValue(":pIdClass", mainClass_7);
+    if (query.exec()) {
+        while (query.next()) {
+            ui->tableWidget_7_mainClass->insertRow(rowCount);
+            ui->tableWidget_7_mainClass->setRowHeight(rowCount, 30);
+            QSqlRecord record = query.record();
+            for (int i = 0; i < record.count(); ++i) {
+                QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                ui->tableWidget_7_mainClass->setItem(rowCount, i, item);
+            }
+             ++rowCount;
+        }
+    }
 }
 
-// void MainWindow::setComboBoxIssue()
-// {
-//     QSqlQuery query;
-//     query.prepare("SELECT issue_type "
-//                   "FROM issues;");
-//     if (query.exec()) {
-//         while (query.next()) {
-//             QString value = query.value(0).toString();
-//             ui->comboBox_4_issue->addItem(value);
-//             ui->comboBox_6_issue->addItem(value);
-//             ui->comboBox_13_issue->addItem(value);
-//         }
-//     }
-// }
+void MainWindow::onMyButtonClickAdd_8()
+{
+    ui->textEdit_8_result->clear();
+    QString name = ui->lineEdit_8_name->text();
+    QString shortName = ui->lineEdit_8_shortName->text();
+    if (name.isEmpty() || name == warnEmpty) {
+        ui->lineEdit_1_name->setText(warnEmpty);
+    }
+    if (shortName.isEmpty()) {
+        shortName = "NULL";
+    }
+    if ((!name.isEmpty() && name != warnEmpty)){
+        QSqlQuery query;
+        query.prepare("SELECT * FROM ADD_PROD(:pShortName, :pName, :pIdClass);");
+        query.bindValue(":pIdClass", classId_8);
+        query.bindValue(":pShortName", shortName);
+        query.bindValue(":pName", name);
 
-// void MainWindow::setComboBoxCarNum()
-// {
-//     QSqlQuery query;
-//     query.prepare("SELECT registration_number "
-//                   "FROM owners;");
-//     if (query.exec()) {
-//         while (query.next()) {
-//             QString value = query.value(0).toString();
-//             ui->comboBox_12_carNum->addItem(value);
-//             ui->comboBox_13_carNum->addItem(value);
-//         }
-//     }
-// }
+        if (query.exec()) {
+            while (query.next()) {
+                QString newID = query.value(0).toString();
+                QString result_out = query.value(1).toString();
+                if (result_out == "1")
+                {
+                    ui->textEdit_8_result->insertPlainText("Запись успешно создана. ID нового изделия: " + newID + "\n");
+                } else if (result_out == "0") {
+                    ui->textEdit_8_result->insertPlainText("Ошибка добавления.\n");
+                }
+            }
+        }
+    }
+}
 
-// void MainWindow::setComboBoxEmployee()
-// {
-//     QSqlQuery query;
-//     query.prepare("SELECT full_name "
-//                   "FROM employee;");
-//     if (query.exec()) {
-//         while (query.next()) {
-//             QString value = query.value(0).toString();
-//             ui->comboBox_13_employee->addItem(value);
-//         }
-//     }
-// }
+void MainWindow::onMyButtonClickDelete_9()
+{
+    ui->textEdit_9_result->clear();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM DELETE_PROD(:pCode);");
+    query.bindValue(":pCode", prodId_9);
 
-// void MainWindow::onComboBoxSearchCurrentIssue4TextChanged(const QString &text)
-// {
-//     int index = ui->comboBox_4_issue->findText(text);
-//     if (index != -1) {
-//         issue_4 = ui->comboBox_4_issue->itemText(index);
-//     }
-// }
+    if (query.exec()) {
+        while (query.next()) {
+            QString result_out = query.value(0).toString();
+            if (result_out == "1")
+            {
+                ui->textEdit_9_result->insertPlainText("Запись успешно удалена.\n");
+            } else if (result_out == "0") {
+                ui->textEdit_9_result->insertPlainText("Ошибка удаления.\n");
+            }
+        }
+    }
+}
 
-// void MainWindow::onComboBoxSearchCurrentIssue6TextChanged(const QString &text)
-// {
-//     int index = ui->comboBox_6_issue->findText(text);
-//     if (index != -1) {
-//         issue_6 = ui->comboBox_6_issue->itemText(index);
-//     }
-// }
+void MainWindow::onMyButtonClickSearchClass_12()
+{
+    ui->tableWidget_12_resultClass->setRowCount(0);
+    int rowCount = 0;
 
-// void MainWindow::onComboBoxCurrentTextChangedCar12(const QString &text)
-// {
-//     int index = ui->comboBox_12_carNum->findText(text);
-//     if (index != -1) {
-//         carNum_12 = ui->comboBox_12_carNum->itemText(index);
-//         qDebug() << carNum_12;
-//     }
-// }
+    QSqlQuery query;
+    query.prepare("SELECT * FROM FIND_PROD_BY_CLASS(:pIdClass) ORDER BY ID_PROD;");
+    query.bindValue(":pIdClass", classId_12);
+    if (query.exec()) {
+        while (query.next()) {
+            ui->tableWidget_12_resultClass->insertRow(rowCount);
+            ui->tableWidget_12_resultClass->setRowHeight(rowCount, 30);
+            QSqlRecord record = query.record();
+            for (int i = 0; i < record.count(); ++i) {
+                QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                ui->tableWidget_12_resultClass->setItem(rowCount, i, item);
+            }
+            ++rowCount;
+        }
+    }
+}
 
-// void MainWindow::onComboBoxCurrentTextChangedCar13(const QString &text)
-// {
-//     int index = ui->comboBox_13_carNum->findText(text);
-//     if (index != -1) {
-//         carNum_13 = ui->comboBox_13_carNum->itemText(index);
-//         qDebug() << carNum_13;
-//     }
-// }
+void MainWindow::onMyButtonClickSearchAll_12()
+{
+    ui->tableWidget_12_result_all->setRowCount(0);
+    int rowCount = 0;
 
-// void MainWindow::onComboBoxCurrentTextChangedEmployee13(const QString &text)
-// {
-//     int index = ui->comboBox_13_employee->findText(text);
-//     if (index != -1) {
-//         employee_13 = ui->comboBox_13_employee->itemText(index);
-//         qDebug() << employee_13;
-//     }
-// }
+    QSqlQuery query;
+    query.prepare("SELECT * FROM PROD ORDER BY ID_PROD;");
+    if (query.exec()) {
+        while (query.next()) {
+            ui->tableWidget_12_result_all->insertRow(rowCount);
+            ui->tableWidget_12_result_all->setRowHeight(rowCount, 30);
+            QSqlRecord record = query.record();
+            for (int i = 0; i < record.count(); ++i) {
+                QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                ui->tableWidget_12_result_all->setItem(rowCount, i, item);
+            }
+            ++rowCount;
+        }
+    }
+}
 
-// void MainWindow::onComboBoxCurrentTextChangedIssue13(const QString &text)
-// {
-//     int index = ui->comboBox_13_issue->findText(text);
-//     if (index != -1) {
-//         issue_13 = ui->comboBox_13_issue->itemText(index);
-//         qDebug() << issue_13;
-//     }
-// }
+void MainWindow::onMyButtonClickAdd_13()
+{
+    ui->textEdit_13_result->clear();
+    QString iVal = ui->lineEdit_13_iVal->text();
+    QString rVal = ui->lineEdit_13_rVal->text();
+    QString name = ui->lineEdit_13_name->text();
+    QString shortName = ui->lineEdit_13_shortName->text();
+    QString image = ui->lineEdit_13_image->text();
 
-// void MainWindow::onMyButtonClickClear7()
-// {
-//     ui->lineEdit_7_name->clear();
-//     ui->lineEdit_7_address->clear();
-//     ui->lineEdit_7_number->clear();
-//     ui->lineEdit_7_model->clear();
-//     ui->lineEdit_7_carNum->clear();
-// }
+    if (name.isEmpty() || name == warnEmpty) {
+        ui->lineEdit_13_name->setText(warnEmpty);
+    }
+    if (shortName.isEmpty()) {
+        shortName = "NULL";
+    }
+    if (iVal.isEmpty()) {
+        iVal = "NULL";
+    }
+    if (rVal.isEmpty()) {
+        rVal = "NULL";
+    }
+    if (image.isEmpty()) {
+        image = "NULL";
+    }
+    if (image == "NULL" && iVal == "NULL" && rVal == "NULL") {
+        ui->textEdit_13_result->insertPlainText("Ошибка добавления. Введите значение перечисления.\n");
+        return;
+    }
+    if ((!name.isEmpty() && name != warnEmpty)){
+        QSqlQuery query;
+        query.prepare("SELECT * FROM INS_VAL_ENUM(:pIdEnum, :pShortName, :pName, pRval, pIntVal, pPicVal);");
+        query.bindValue(":pIdEnum", idEnum_13);
+        query.bindValue(":pShortName", shortName);
+        query.bindValue(":pName", name);
+        query.bindValue(":pRval", rVal);
+        query.bindValue(":pIntVal", iVal);
+        query.bindValue(":pPicVal", image);
 
-// void MainWindow::onMyButtonClickClear8()
-// {
-//     ui->lineEdit_8_name->clear();
-//     ui->lineEdit_8_surName->clear();
-//     ui->lineEdit_8_fatherName->clear();;
-// }
+        if (query.exec()) {
+            while (query.next()) {
+                QString newId = query.value(0).toString();
+                QString result_out = query.value(1).toString();
+                if (result_out == "1")
+                {
+                    ui->textEdit_13_result->insertPlainText("Запись успешно создана. ИД новой записи : " + newId + "\n");
+                } else if (result_out == "0") {
+                    ui->textEdit_13_result->insertPlainText("Ошибка добавления.\n");
+                }
+            }
+        } else {
+            ui->textEdit_13_result->insertPlainText("Запрос не выполнен." + query.lastError().text() + "\n");
+        }
+    }
+}
 
-// void MainWindow::onMyButtonClickClear12()
-// {
-//     ui->lineEdit_12_manufacturer->clear();
-//     ui->lineEdit_12_model->clear();
-//     ui->lineEdit_12_year->clear();;
-// }
+void MainWindow::onMyButtonClickDeleteEnum_14()
+{
+    ui->textEdit_14_requestEnum->clear();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM DEL_ENUM(:pCode);");
+    query.bindValue(":pCode", idEnum_14);
 
-// void MainWindow::onMyButtonClickClear13()
-// {
-//     ui->lineEdit_13_description->clear();
-//     ui->lineEdit_13_endTime->clear();
-//     ui->lineEdit_13_startTime->clear();;
-// }
+    if (query.exec()) {
+        while (query.next()) {
+            QString result_out = query.value(0).toString();
+            if (result_out == "1")
+            {
+                ui->textEdit_14_requestEnum->insertPlainText("Записи успешно удалены.\n");
+            } else if (result_out == "0") {
+                ui->textEdit_14_requestEnum->insertPlainText("Ошибка удаления.\n");
+            }
+        }
+    }
+}
 
-// void MainWindow::onMyButtonClickClear14()
-// {
-//     ui->lineEdit_14_address->clear();
-//     ui->lineEdit_14_name->clear();
-//     ui->lineEdit_14_number->clear();;
-// }
+void MainWindow::onMyButtonClickDeleteVal_14()
+{
+    ui->textEdit_14_requestVal->clear();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM DEL_ENUM_VAL(:pCode);");
+    query.bindValue(":pCode", idVal_14);
 
+    if (query.exec()) {
+        while (query.next()) {
+            QString result_out = query.value(0).toString();
+            if (result_out == "1")
+            {
+                ui->textEdit_14_requestVal->insertPlainText("Запись успешно удалена.\n");
+            } else if (result_out == "0") {
+                ui->textEdit_14_requestVal->insertPlainText("Ошибка удаления.\n");
+            }
+        }
+    }
+}
 
-// void MainWindow::onComboBoxAddCurrentTextChanged(const QString &text)
-// {
-//     int index = ui->comboBox_add->findText(text);
-//     if (index != -1) {
-//         ui->stackedWidget_add->setCurrentIndex(index);
-//     }
-// }
+void MainWindow::onMyButtonClickDown_17()
+{
+    ui->textEdit_17_result_down->clear();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM DOWN_VAL(:pCode);");
+    query.bindValue(":pCode", idDown_17);
+    if (query.exec()) {
+        while (query.next()) {
+            QString result_out = query.value(0).toString();
+            if (result_out == "1")
+            {
+                ui->textEdit_17_result_down->insertPlainText("Запись успешно перемещена вниз.\n");
+            } else if (result_out == "0") {
+                ui->textEdit_17_result_down->insertPlainText("Ошибка перемещения.\n");
+            }
+        }
+    } else {
+        ui->textEdit_17_result_down->insertPlainText("Запрос не выполнен.\n");
+    }
+}
 
-// void MainWindow::onMyButtonClickSearch_OwnerByCarId()
-// {
-//     ui->textEdit_1_searchResult->clear();
-//     QString code = ui->lineEdit_1_code->text();
-//     QString region = ui->lineEdit_1_region->text();
-//     QString country = ui->lineEdit_1_country->text();
-//     if (code.isEmpty() || code == warnEmpty) {
-//         ui->lineEdit_1_code->setText(warnEmpty);
-//     }
-//     if (region.isEmpty() || region == warnEmpty) {
-//         ui->lineEdit_1_region->setText(warnEmpty);
-//     }
-//     if (country.isEmpty() || country == warnEmpty) {
-//         ui->lineEdit_1_country->setText(warnEmpty);
-//     }
-//     if ((!code.isEmpty() && code != warnEmpty) &&
-//         (!region.isEmpty() && region != warnEmpty) &&
-//         (!country.isEmpty() && country != warnEmpty)){
-//         QSqlQuery query;
-//         code = code.toUpper() + " " + region.toUpper() + " " + country.toUpper();
-//         query.prepare("SELECT full_name, address "
-//                       "FROM Owners "
-//                       "WHERE registration_number = :registration_number;");
-//         query.bindValue(":registration_number", code);
+void MainWindow::onMyButtonClickUp_17()
+{
+    ui->textEdit_17_result_up->clear();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM UP_VAL(:pCode);");
+    query.bindValue(":pCode", idUp_17);
 
-//         if (query.exec()) {
-//             while (query.next()) {
-//                 QSqlRecord record = query.record();
-//                 QString result_out = "";
-//                 for (int i = 0; i < record.count(); ++i) {
-//                     result_out = record.value(i).toString();
-//                 }
-//                 ui->textEdit_1_searchResult->insertPlainText(result_out + "\n");
-//             }
-//         }
-//     }
-// }
+    if (query.exec()) {
+        while (query.next()) {
+            QString result_out = query.value(0).toString();
+            if (result_out == "1")
+            {
+                ui->textEdit_17_result_up->insertPlainText("Запись успешно перемещена вверх.\n");
+            } else if (result_out == "0") {
+                ui->textEdit_17_result_up->insertPlainText("Ошибка перемещения.\n");
+            }
+        }
+    } else {
+        ui->textEdit_17_result_up->insertPlainText("Запрос не выполнен." + query.lastError().text() + "\n");
+    }
+}
 
-// void MainWindow::onMyButtonClickSearch_CarByOwner()
-// {
-//     ui->textEdit_2_searchResult->clear();
-//     QString surname = ui->lineEdit_2_surname->text();
-//     QString name = ui->lineEdit_2_name->text();
-//     QString fatherName = ui->lineEdit_2_fatherName->text();
-//     if (surname.isEmpty() || surname == warnEmpty) {
-//         ui->lineEdit_2_surname->setText(warnEmpty);
-//     }
-//     if (name.isEmpty() || name == warnEmpty) {
-//         ui->lineEdit_2_name->setText(warnEmpty);
-//     }
+void MainWindow::onMyButtonClickSearch_18()
+{
+    ui->tableWidget_18_result->setRowCount(0);
+    int rowCount = 0;
+    QSqlQuery query;
+    query.prepare("SELECT * FROM FIND_LIST_ENUM(:pIdEnum) ORDER BY oIdPos;");
+    query.bindValue(":pIdEnum", idEnum_18);
+    if (query.exec()) {
+        while (query.next()) {
+            ui->tableWidget_18_result->insertRow(rowCount);
+            ui->tableWidget_18_result->setRowHeight(rowCount, 30);
+            QSqlRecord record = query.record();
+            for (int i = 0; i < record.count(); ++i) {
+                if (i > 3 && record.value(i).toString() != "NULL") {
+                    QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                    ui->tableWidget_18_result->setItem(rowCount, 4, item);
+                } else if (i <= 3) {
+                    QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                    ui->tableWidget_18_result->setItem(rowCount, i, item);
+                }
+            }
+            ++rowCount;
+        }
+    }
+}
 
-//     if ((!surname.isEmpty() && surname != warnEmpty) &&
-//         (!name.isEmpty() && name != warnEmpty)){
-//         QSqlQuery query;
-//         if (!fatherName.isEmpty()) {
-//             name = surname + " " + name + " " + fatherName;
-//         } else {
-//             name = surname + " " + name;
-//         }
-//         qDebug() << name;
-//         query.prepare("SELECT Owners.full_name, Car.registration_number, Car.manufacturer, Car.model, Car.year_manufactured "
-//                       "FROM Owners JOIN Car "
-//                       "On Owners.registration_number = Car.registration_number "
-//                       "WHERE Owners.full_name = :name;");
-//         query.bindValue(":name", name);
+void MainWindow::onMyButtonClickAdd_16()
+{
+    ui->textEdit_16_result->clear();
+    QString maxVal = ui->lineEdit_16_maxVal->text();
+    QString minVal = ui->lineEdit_16_minVal->text();
+    if (maxVal.isEmpty()) {
+        maxVal = "NULL";
+    }
+    if (minVal.isEmpty()) {
+        minVal = "NULL";
+    }
+    QSqlQuery query;
+    query.prepare("SELECT * FROM ADD_PARAMETR_CLASS(:pIdPar, :pIdClass, :pMinVal, :pMaxVal);");
+    query.bindValue(":pIdPar", paramId_16);
+    query.bindValue(":pIdClass", classId_16);
+    query.bindValue(":pMinVal", minVal);
+    query.bindValue(":pMaxVal", maxVal);
 
-//         if (query.exec()) {
-//             while (query.next()) {
-//                 QSqlRecord record = query.record();
-//                 QString result_out = "";
-//                 for (int i = 0; i < record.count(); ++i) {
-//                     result_out += record.value(i).toString() + " ";
-//                 }
-//                 ui->textEdit_2_searchResult->insertPlainText(result_out + "\n" + separator);
-//             }
-//         }
-//     }
-// }
+    if (query.exec()) {
+        while (query.next()) {
+            QString result_out = query.value(1).toString();
+            if (result_out == "1")
+            {
+                ui->textEdit_16_result->insertPlainText("Запись успешно создана.\n");
+            } else if (result_out == "0") {
+                ui->textEdit_16_result->insertPlainText("Ошибка добавления.\n");
+            }
+        }
+    }
+}
 
-// void MainWindow::onMyButtonClickSearch_IsseuByOwner()
-// {
-//     ui->textEdit_3_searchResult->clear();
-//     QString surname = ui->lineEdit_3_surname->text();
-//     QString name = ui->lineEdit_3_name->text();
-//     QString fatherName = ui->lineEdit_3_fatherName->text();
-//     if (surname.isEmpty() || surname == warnEmpty) {
-//         ui->lineEdit_3_surname->setText(warnEmpty);
-//     }
-//     if (name.isEmpty() || name == warnEmpty) {
-//         ui->lineEdit_3_name->setText(warnEmpty);
-//     }
+void MainWindow::onMyButtonClickAdd_19()
+{
+    ui->textEdit_19_result->clear();
+    QString type = ui->lineEdit_19_type->text();
+    QString name = ui->lineEdit_19_name->text();
+    QString shortName = ui->lineEdit_19_shortName->text();
+    if (type.isEmpty() || type == warnEmpty) {
+        ui->lineEdit_19_type->setText(warnEmpty);
+    }
+    if (name.isEmpty() || name == warnEmpty) {
+        ui->lineEdit_19_name->setText(warnEmpty);
+    }
+    if (shortName.isEmpty()) {
+        shortName = "NULL";
+    }
+    if ((!type.isEmpty() && type != warnEmpty) &&
+        (!name.isEmpty() && name != warnEmpty)){
+        QSqlQuery query;
+        query.prepare("SELECT * FROM INS_PARAMETR(:pShName, :pName, :pIdEI, :pTypePar);");
+        query.bindValue(":pIdEI", idEI_19);
+        query.bindValue(":pShortName", shortName);
+        query.bindValue(":pName", name);
+        query.bindValue(":pTypePar", type);
 
-//     if ((!surname.isEmpty() && surname != warnEmpty) &&
-//         (!name.isEmpty() && name != warnEmpty)){
-//         QSqlQuery query;
-//         if (!fatherName.isEmpty()) {
-//             name = surname + " " + name + " " + fatherName;
-//         } else {
-//             name = surname + " " + name;
-//         }
-//         qDebug() << name;
-//         query.prepare("SELECT Repairs.registration_number, Repairs.issue_type, Repairs.description "
-//                       "FROM Owners JOIN Repairs "
-//                       "On Owners.registration_number = Repairs.registration_number "
-//                       "WHERE Owners.full_name = :name AND Repairs.status_id = 'ГОТОВО';");
-//         query.bindValue(":name", name);
+        if (query.exec()) {
+            while (query.next()) {
+                QString idPar = query.value(0).toString();
+                QString result_out = query.value(1).toString();
+                if (result_out == "1")
+                {
+                    ui->textEdit_19_result->insertPlainText("Запись успешно создана. ID нового параметра: " + idPar + "\n");
+                } else if (result_out == "0") {
+                    ui->textEdit_19_result->insertPlainText("Ошибка добавления.\n");
+                }
+            }
+        }
+    }
+}
 
-//         if (query.exec()) {
-//             while (query.next()) {
-//                 QSqlRecord record = query.record();
-//                 QString result_out = "";
-//                 for (int i = 0; i < record.count(); ++i) {
-//                     result_out += record.value(i).toString() + " ";
-//                 }
-//                 ui->textEdit_3_searchResult->insertPlainText(result_out + "\n" + separator);
-//             }
-//         }
-//     }
-// }
+void MainWindow::onMyButtonClickAdd_23()
+{
+    ui->textEdit_23_result->clear();
+    QString val = ui->lineEdit_23_val->text();
+    QString str = ui->lineEdit_23_str->text();
+    QString note = ui->lineEdit_23_note->text();
+    if (val.isEmpty() && str == warnEmpty) {
+        return;
+    }
+    if (val.isEmpty()) {
+        val = "NULL";
+    }
+    if (str.isEmpty()) {
+        str = "NULL";
+    }
+    if (note.isEmpty()) {
+        note = "NULL";
+    }
+    if (!val.isEmpty() || str != warnEmpty) {
+        QSqlQuery query;
+        query.prepare("SELECT * FROM WRITE_PAR_PROD(:pIdProd, :pIdPar, :pVal, :pStr, :pEnumVal, :pNote);");
+        query.bindValue(":pIdProd", prodId_23);
+        query.bindValue(":pIdPar", paramId_23);
+        query.bindValue(":pVal", val);
+        query.bindValue(":pStr", str);
+        query.bindValue(":pNote", note);
+        query.bindValue(":pEnumVal", idEnum_23);
 
-// void MainWindow::onMyButtonClickSearch_EmployeeByOwnerIssue()
-// {
-//     ui->textEdit_4_searchResult->clear();
-//     QString surname = ui->lineEdit_4_surname->text();
-//     QString name = ui->lineEdit_4_name->text();
-//     QString fatherName = ui->lineEdit_4_fatherName->text();
-//     if (surname.isEmpty() || surname == warnEmpty) {
-//         ui->lineEdit_4_surname->setText(warnEmpty);
-//     }
-//     if (name.isEmpty() || name == warnEmpty) {
-//         ui->lineEdit_4_name->setText(warnEmpty);
-//     }
+        if (query.exec()) {
+            while (query.next()) {
+                QString result_out = query.value(0).toString();
+                if (result_out == "1")
+                {
+                    ui->textEdit_23_result->insertPlainText("Значение успешно добавлено.\n");
+                } else if (result_out == "0") {
+                    ui->textEdit_23_result->insertPlainText("Ошибка добавления.\n");
+                }
+            }
+        }
+    }
+}
 
-//     if ((!surname.isEmpty() && surname != warnEmpty) &&
-//         (!name.isEmpty() && name != warnEmpty)){
-//         QSqlQuery query;
-//         if (!fatherName.isEmpty()) {
-//             name = surname + " " + name + " " + fatherName;
-//         } else {
-//             name = surname + " " + name;
-//         }
-//         query.prepare("SELECT Repairs.registration_number, Repairs.issue_type, Repairs.employee_name, Repairs.repair_time "
-//                       "FROM Owners JOIN Repairs "
-//                       "On Owners.registration_number = Repairs.registration_number "
-//                       "WHERE Owners.full_name = :name AND Repairs.status_id = 'ГОТОВО' AND  Repairs.issue_type = :type;");
-//         query.bindValue(":name", name);
-//         query.bindValue(":type", issue_4);
+void MainWindow::onMyButtonClickCopy_25()
+{
+    ui->textEdit_25_result->clear();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM COPY_PAR(:pIdMain, :pIdClass);");
+    query.bindValue(":pIdMain", mainClass_25);
+    query.bindValue(":pIdClass", classId_25);
 
-//         if (query.exec()) {
-//             while (query.next()) {
-//                 QSqlRecord record = query.record();
-//                 QString result_out = "";
-//                 for (int i = 0; i < record.count(); ++i) {
-//                     result_out += record.value(i).toString() + " ";
-//                 }
-//                 ui->textEdit_4_searchResult->insertPlainText(result_out + "\n" + separator);
-//             }
-//         }
-//     }
-// }
+    if (query.exec()) {
+        while (query.next()) {
+            QString result_out = query.value(0).toString();
+            if (result_out == "1")
+            {
+                ui->textEdit_25_result->insertPlainText("Параметры успешно скопированы.\n");
+            } else if (result_out == "0") {
+                ui->textEdit_25_result->insertPlainText("Ошибка копирования.\n");
+            }
+        }
+    }
+}
 
-// void MainWindow::onMyButtonClickSearch_CarByEmployee()
-// {
-//     ui->textEdit_5_searchResult->clear();
-//     QString surname = ui->lineEdit_5_surname->text();
-//     QString name = ui->lineEdit_5_name->text();
-//     QString fatherName = ui->lineEdit_5_fatherName->text();
-//     if (surname.isEmpty() || surname == warnEmpty) {
-//         ui->lineEdit_5_surname->setText(warnEmpty);
-//     }
-//     if (name.isEmpty() || name == warnEmpty) {
-//         ui->lineEdit_5_name->setText(warnEmpty);
-//     }
+void MainWindow::onMyButtonClickProd_26()
+{
+    ui->tableWidget_26_prod->setRowCount(0);
+    int rowCount = 0;
 
-//     if ((!surname.isEmpty() && surname != warnEmpty) &&
-//         (!name.isEmpty() && name != warnEmpty)){
-//         if (!fatherName.isEmpty()) {
-//             name = surname + " " + name + " " + fatherName;
-//         } else {
-//             name = surname + " " + name;
-//         }
-//         qDebug() << name;
-//         QSqlQuery query;
-//         query.prepare("SELECT Car.registration_number, Car.manufacturer, Car.model "
-//                       "FROM Repairs JOIN Car "
-//                       "On Repairs.registration_number = Car.registration_number "
-//                       "WHERE Repairs.employee_name = :name;");
-//         query.bindValue(":name", name);
+    QSqlQuery query;
+    query.prepare("SELECT * FROM FIND_PAR_PROD(:pIdProd);");
+    query.bindValue(":pIdProd", prodId_26);
+    if (query.exec()) {
+        while (query.next()) {
+            ui->tableWidget_26_prod->insertRow(rowCount);
+            ui->tableWidget_26_prod->setRowHeight(rowCount, 30);
+            QSqlRecord record = query.record();
+            for (int i = 0; i < record.count(); ++i) {
+                QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                ui->tableWidget_26_prod->setItem(rowCount, i, item);
+            }
+            ++rowCount;
+        }
+    }
+}
 
-//         if (query.exec()) {
-//             while (query.next()) {
-//                 QSqlRecord record = query.record();
-//                 QString result_out = "";
-//                 for (int i = 0; i < record.count(); ++i) {
-//                     result_out += record.value(i).toString() + " ";
-//                 }
-//                 ui->textEdit_5_searchResult->insertPlainText(result_out + "\n" + separator);
-//             }
-//         }
-//     }
-// }
+void MainWindow::onMyButtonClickSearch_26()
+{
+    ui->tableWidget_26_search->setRowCount(0);
+    int rowCount = 0;
 
-// void MainWindow::onMyButtonClickSearch_OwnerByIssue()
-// {
-//     ui->textEdit_6_searchResult->clear();
-//     if (!issue_6.isEmpty()) {
-//         QSqlQuery query;
-//         query.prepare("SELECT Owners.full_name, Owners.phone_number, Owners.registration_number, Owners.car_model "
-//                       "FROM Repairs JOIN Owners "
-//                       "On Repairs.registration_number = Owners.registration_number "
-//                       "WHERE Repairs.issue_type = :type;");
-//         query.bindValue(":type", issue_6);
+    QSqlQuery query;
+    query.prepare("SELECT * FROM FIND_PAR_CLASS(:pIdClass);");
+    query.bindValue(":pIdClass", classId_26);
+    if (query.exec()) {
+        while (query.next()) {
+            ui->tableWidget_26_search->insertRow(rowCount);
+            ui->tableWidget_26_search->setRowHeight(rowCount, 30);
+            QSqlRecord record = query.record();
+            for (int i = 0; i < record.count(); ++i) {
+                QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                ui->tableWidget_26_search->setItem(rowCount, i, item);
+            }
+            ++rowCount;
+        }
+    }
+}
 
-//         if (query.exec()) {
-//             while (query.next()) {
-//                 QSqlRecord record = query.record();
-//                 QString result_out = "";
-//                 for (int i = 0; i < record.count(); ++i) {
-//                     result_out += record.value(i).toString() + " ";
-//                 }
-//                 ui->textEdit_6_searchResult->insertPlainText(result_out + "\n" + separator);
-//             }
-//         }
-//     }
-// }
+void MainWindow::onClear4()
+{
+    ui->lineEdit_4_nameClass->clear();
+    ui->lineEdit_4_shortName->clear();
+}
 
-// void MainWindow::onMyButtonClickAddClient()
-// {
-//     QString name = ui->lineEdit_7_name->text();
-//     QString address = ui->lineEdit_7_address->text();
-//     QString number = ui->lineEdit_7_number->text();
-//     QString model = ui->lineEdit_7_model->text();
-//     QString carNum = ui->lineEdit_7_carNum->text();
-
-//     int flag = 1;
-//     if (name.isEmpty() || name == warnEmpty) {
-//          ui->lineEdit_7_name->setText(warnEmpty);
-//         flag = 0;
-//     }
-//     if (address.isEmpty() || address == warnEmpty) {
-//         ui->lineEdit_7_address->setText(warnEmpty);
-//         flag = 0;
-//     }
-//     if (number.isEmpty() || number == warnEmpty) {
-//         ui->lineEdit_7_number->setText(warnEmpty);
-//         flag = 0;
-//     }
-//     if (model.isEmpty() || model == warnEmpty) {
-//         ui->lineEdit_7_model->setText(warnEmpty);
-//         flag = 0;
-//     }
-//     if (carNum.isEmpty() || carNum == warnEmpty) {
-//         ui->lineEdit_7_carNum->setText(warnEmpty);
-//         flag = 0;
-//     }
-
-//     if (flag) {
-//         QSqlQuery query;
-//         query.prepare("INSERT INTO owners (full_name, address, phone_number, car_model, registration_number) VALUES "
-//                       "(:name, :address, :number, :model, :carNum);");
-//         query.bindValue(":name", name);
-//         query.bindValue(":address", address);
-//         query.bindValue(":number", number);
-//         query.bindValue(":model", model);
-//         query.bindValue(":carNum", carNum);
-//         if (query.exec()) {
-//             statusBar()->showMessage("Запись успешно добавлена!", 5000);
-//         } else {
-//             statusBar()->showMessage("Ошибка записи. Проверьте корректность данных", 5000);
-//         }
-//     }
-// }
-
-
-// void MainWindow::onMyButtonClickRemoveEmployee()
-// {
-//     QString name = ui->lineEdit_8_name->text();
-//     QString surname = ui->lineEdit_8_surName->text();
-//     QString fatherName = ui->lineEdit_8_fatherName->text();
-
-//     int flag = 1;
-//     if (name.isEmpty() || name == warnEmpty) {
-//         ui->lineEdit_8_name->setText(warnEmpty);
-//         flag = 0;
-//     }
-//     if (surname.isEmpty() || surname == warnEmpty) {
-//         ui->lineEdit_8_surName->setText(warnEmpty);
-//         flag = 0;
-//     }
-
-//     if (flag) {
-//         if (!fatherName.isEmpty()){
-//             name = surname + " " + name + " " + fatherName;
-//         } else {
-//             name = surname + " " + name;
-//         }
-//         QSqlQuery query;
-//         query.prepare("SELECT COUNT(*) FROM Employee WHERE full_name = :name;");
-//         query.bindValue(":name", name);
-//         if (query.exec()) {
-//             int result_out = 0;
-//             while (query.next()) {
-//                 QSqlRecord record = query.record();
-//                 result_out = record.value(0).toInt();
-//             }
-//             if (result_out == 0) {
-//                 statusBar()->showMessage("Работник с введенным ФИО не найден", 5000);
-//             } else {
-//                 query.prepare("DELETE FROM Employee WHERE full_name = :name;");
-//                 query.bindValue(":name", name);
-
-//                 if (query.exec()) {
-//                     statusBar()->showMessage("Записи успешно удалены", 5000);
-//                 } else {
-//                     statusBar()->showMessage("Ошибка записи. Проверьте корректность данных", 5000);
-//                 }
-//             }
-//         } else {
-//             statusBar()->showMessage("Ошибка записи", 5000);
-//         }
-//     }
-// }
-
-// void MainWindow::onMyButtonClickChangeCarCode()
-// {
-//     QString oldCode = ui->lineEdit_9_carCodeOld->text();
-//     QString newCode = ui->lineEdit_9_carCodeNew->text();
-
-//     int flag = 1;
-//     if (oldCode.isEmpty() || oldCode == warnEmpty) {
-//         ui->lineEdit_9_carCodeOld->setText(warnEmpty);
-//         flag = 0;
-//     }
-//     if (newCode.isEmpty() || newCode == warnEmpty) {
-//         ui->lineEdit_9_carCodeNew->setText(warnEmpty);
-//         flag = 0;
-//     }
-
-//     if (flag) {
-//         QSqlQuery query;
-//         query.prepare("SELECT COUNT(*) FROM Owners WHERE registration_number = :oldCode;");
-//         query.bindValue(":oldCode", oldCode);
-//         if (query.exec()) {
-//             int result_out = 0;
-//             while (query.next()) {
-//                 QSqlRecord record = query.record();
-//                 result_out = record.value(0).toInt();
-//             }
-//             if (result_out == 0) {
-//                 statusBar()->showMessage("Клиент с введенным госномером не найден", 5000);
-//             } else {
-//                 query.prepare("UPDATE Owners SET registration_number = :newCode WHERE registration_number = :oldCode;");
-//                 query.bindValue(":oldCode", oldCode);
-//                 query.bindValue(":newCode", newCode);
-
-//                 if (query.exec()) {
-//                     statusBar()->showMessage("Успешно изменено!", 5000);
-//                 } else {
-//                     statusBar()->showMessage("Ошибка записи", 5000);
-//                 }
-//             }
-//         } else {
-//             statusBar()->showMessage("Ошибка записи", 5000);
-//         }
-//     }
-// }
-
-// void MainWindow::onMyButtonClickAddCar()
-// {
-//     QString year = ui->lineEdit_12_year->text();
-//     QString manufacturer = ui->lineEdit_12_manufacturer->text();
-//     QString model = ui->lineEdit_12_model->text();
-
-//     int flag = 1;
-//     if (year.isEmpty() || year == warnEmpty) {
-//         ui->lineEdit_12_year->setText(warnEmpty);
-//         flag = 0;
-//     }
-//     if (manufacturer.isEmpty() || manufacturer == warnEmpty) {
-//         ui->lineEdit_12_manufacturer->setText(warnEmpty);
-//         flag = 0;
-//     }
-//     if (model.isEmpty() || model == warnEmpty) {
-//         ui->lineEdit_12_model->setText(warnEmpty);
-//         flag = 0;
-//     }
-
-//     if (flag) {
-//         QSqlQuery query;
-//         query.prepare("INSERT INTO car (registration_number, year_manufactured, manufacturer, model) VALUES "
-//                       "(:carNum, :year, :manu, :model);");
-//         query.bindValue(":carNum", carNum_12);
-//         query.bindValue(":year", year.toInt());
-//         query.bindValue(":manu", manufacturer);
-//         query.bindValue(":model", model);
-//         if (query.exec()) {
-//             statusBar()->showMessage("Запись успешно добавлена!", 5000);
-//         } else {
-//             statusBar()->showMessage("Ошибка записи. Проверьте корректность данных", 5000);
-//         }
-//     }
-// }
-
-// void MainWindow::onMyButtonClickAddRepair()
-// {
-//     QString start_time = ui->lineEdit_13_startTime->text();
-//     QString end_time = ui->lineEdit_13_endTime->text();
-//     QString description = ui->lineEdit_13_description->text();
-
-//     int flag = 0;
-//     if (!start_time.isEmpty() && end_time.isEmpty()) {
-//         flag = 1;
-//     }
-//     if (start_time.isEmpty() && !end_time.isEmpty()) {
-//         flag = 2;
-//     }
-//     if (!start_time.isEmpty() && !end_time.isEmpty()) {
-//         flag = 3;
-//     }
-//     if (start_time.isEmpty() && end_time.isEmpty()) {
-//         flag = 4;
-//     }
-
-//     if (carNum_13.isEmpty() || employee_13.isEmpty() || issue_13.isEmpty()) {
-//         flag = 0;
-//     }
-
-//     QSqlQuery query;
-//     switch (flag)
-//     {
-//     case 1:
-//         query.prepare("INSERT INTO repairs (registration_number, employee_name, issue_type, "
-//                       "description, status_id, start_time) VALUES "
-//                       "(:carNum, :employee, :issue, :description, \"В ПРОЦЕССЕ\", :start_time);");
-//         query.bindValue(":carNum", carNum_13);
-//         query.bindValue(":employee", employee_13);
-//         query.bindValue(":issue", issue_13);
-//         query.bindValue(":description", description);
-//         query.bindValue(":start_time", start_time);
-//         if (query.exec()) {
-//             statusBar()->showMessage("Запись успешно добавлена! Статус работ: В ПРОЦЕССЕ", 5000);
-//         } else {
-//             statusBar()->showMessage("Ошибка записи. Проверьте корректность данных", 5000);
-//         }
-//         break;
-//     case 2:
-//         query.prepare("SELECT start_time FROM repairs "
-//                       "WHERE registration_number = :carNum AND employee_name = :employee AND issue_type = :issue;");
-//         query.bindValue(":carNum", carNum_13);
-//         query.bindValue(":employee", employee_13);
-//         query.bindValue(":issue", issue_13);
-//         if (query.exec()) {
-//             QString result_out = 0;
-//             while (query.next()) {
-//                 QSqlRecord record = query.record();
-//                 result_out = record.value(0).toString();
-//             }
-//             if (result_out.isEmpty()) {
-//                 statusBar()->showMessage("Запись с введенными параметрами на найдена", 5000);
-//             } else {
-//                 query.prepare("UPDATE repairs SET "
-//                               "SET end_time = :end_time, status_id = \"ГОТОВО\", repair_time = :end_time - :start_time;");
-//                 query.bindValue(":end_time", end_time);
-//                 query.bindValue(":start_time", result_out);
-//                 if (query.exec()) {
-//                     statusBar()->showMessage("Запись успешно добавлена! Статус работ: ГОТОВО", 5000);
-//                 } else {
-//                     statusBar()->showMessage("Ошибка записи. Проверьте корректность данных", 5000);
-//                 }
-//             }
-//         }
-//         break;
-//     case 3:
-//         query.prepare("INSERT INTO repairs (registration_number, employee_name, issue_type, "
-//                       "description, status_id, start_time, end_time, repair_time) VALUES "
-//                       "(:carNum, :employee, :issue, :description, \'ГОТОВО\', :start_time, :end_time, AGE(:end_time, :start_time));");
-//         query.bindValue(":carNum", carNum_13);
-//         query.bindValue(":employee", employee_13);
-//         query.bindValue(":issue", issue_13);
-//         query.bindValue(":description", description);
-//         query.bindValue(":start_time", start_time);
-//         query.bindValue(":end_time", end_time);
-//         if (query.exec()) {
-//             statusBar()->showMessage("Запись успешно добавлена! Статус работ: ГОТОВО", 5000);
-//         } else {
-//             qDebug() << query.lastError().text();
-//             statusBar()->showMessage("Ошибка записи. Проверьте корректность данных", 5000);
-//         }
-//         break;
-//     case 4:
-//         query.prepare("INSERT INTO repairs (registration_number, employee_name, issue_type, "
-//                       "description, status_id) VALUES "
-//                       "(:carNum, :employee, :issue, :description, \"НЕ НАЧАТО\");");
-//         query.bindValue(":carNum", carNum_13);
-//         query.bindValue(":employee", employee_13);
-//         query.bindValue(":issue", issue_13);
-//         query.bindValue(":description", description);
-//         if (query.exec()) {
-//             statusBar()->showMessage("Запись успешно добавлена! Статус работ: НЕ НАЧАТО", 5000);
-//         } else {
-//             statusBar()->showMessage("Ошибка записи. Проверьте корректность данных", 5000);
-//         }
-//         break;
-//     default:
-//         statusBar()->showMessage("Ошибка записи. Проверьте значения выпадающих списков", 5000);
-//         break;
-//     }
-// }
-
-// void MainWindow::onMyButtonClickAddEmployee()
-// {
-//     QString address = ui->lineEdit_14_address->text();
-//     QString name = ui->lineEdit_14_name->text();
-//     QString number = ui->lineEdit_14_number->text();
-
-//     int flag = 1;
-//     if (address.isEmpty() || address == warnEmpty) {
-//         ui->lineEdit_14_address->setText(warnEmpty);
-//         flag = 0;
-//     }
-//     if (name.isEmpty() || name == warnEmpty) {
-//         ui->lineEdit_14_name->setText(warnEmpty);
-//         flag = 0;
-//     }
-//     if (number.isEmpty() || number == warnEmpty) {
-//         ui->lineEdit_14_number->setText(warnEmpty);
-//         flag = 0;
-//     }
-
-//     if (flag) {
-//         QSqlQuery query;
-//         query.prepare("INSERT INTO employee (full_name, address, phone_number) VALUES "
-//                       "(:name, :address, :number);");
-//         query.bindValue(":address", address);
-//         query.bindValue(":name", name);
-//         query.bindValue(":number", number);
-//         if (query.exec()) {
-//             statusBar()->showMessage("Запись успешно добавлена!", 5000);
-//         } else {
-//             statusBar()->showMessage("Ошибка записи. Проверьте корректность данных", 5000);
-//         }
-//     }
-// }
-
-// void MainWindow::onMyButtonClickMakeReportIssue()
-// {
-//     ui->textEdit_10_result->clear();
-//     QString surname = ui->lineEdit_10_surName->text();
-//     QString name = ui->lineEdit_10_name->text();
-//     QString fatherName = ui->lineEdit_10_fatherName->text();
-
-//     int flag = 1;
-//     if (surname.isEmpty() || surname == warnEmpty) {
-//         ui->lineEdit_10_surName->setText(warnEmpty);
-//         flag = 0;
-//     }
-//     if (name.isEmpty() || name == warnEmpty) {
-//         ui->lineEdit_10_name->setText(warnEmpty);
-//         flag = 0;
-//     }
-
-//     if (flag) {
-//         if (!fatherName.isEmpty()) {
-//             name = surname + " " + name + " " + fatherName;
-//         } else {
-//             name = surname + " " + name;
-//         }
-//         QSqlQuery query;
-//         query.prepare("SELECT Owners.full_name, Repairs.issue_type, Repairs.description "
-//                       "FROM Owners JOIN Repairs "
-//                       "On Owners.registration_number = Repairs.registration_number "
-//                       "WHERE Owners.full_name = :name AND Repairs.status_id != 'ГОТОВО';");
-//         query.bindValue(":name", name);
-//         if (query.exec()) {
-//             while (query.next()) {
-//                 QSqlRecord record = query.record();
-//                 QString result_out = "";
-//                 for (int i = 0; i < record.count(); ++i) {
-//                     result_out += record.value(i).toString() + " ";
-//                 }
-//                 ui->textEdit_10_result->insertPlainText(result_out + "\n");
-//             }
-//         }
-//     }
-// }
-
-// void MainWindow::onMyButtonClickMakeReportStation()
-// {
-//     ui->lineEdit_11_amount->clear();
-//     ui->textEdit_11_repairs->clear();
-//     ui->textEdit_11_issues->clear();
-
-//     QSqlQuery query;
-//     query.prepare("SELECT COUNT(*) "
-//                   "FROM Repairs "
-//                   "WHERE status_id != 'ГОТОВО';");
-//     if (query.exec()) {
-//         while (query.next()) {
-//             QSqlRecord record = query.record();
-//             QString result_out = record.value(0).toString();
-//             ui->lineEdit_11_amount->setAlignment(Qt::AlignCenter);
-//             ui->lineEdit_11_amount->setText(result_out);
-//         }
-//     }
-
-//     query.prepare("SELECT employee_name, repair_time "
-//                   "FROM Repairs "
-//                   "WHERE status_id = 'ГОТОВО';");
-//     if (query.exec()) {
-//         while (query.next()) {
-//             QSqlRecord record = query.record();
-//             QString result_out = "";
-//             for (int i = 0; i < record.count(); ++i) {
-//                 result_out += record.value(i).toString() + " ";
-//             }
-//             ui->textEdit_11_repairs->insertPlainText(result_out + "\n");
-//         }
-//     }
-
-//     query.prepare("SELECT Car.manufacturer, Car.model, Repairs.issue_type "
-//                   "FROM Car JOIN Repairs "
-//                   "On Car.registration_number = Repairs.registration_number;");
-//     if (query.exec()) {
-//         while (query.next()) {
-//             QSqlRecord record = query.record();
-//             QString result_out = "";
-//             for (int i = 0; i < record.count(); ++i) {
-//                 result_out += record.value(i).toString() + " ";
-//             }
-//             ui->textEdit_11_issues->insertPlainText(result_out + "\n");
-//         }
-//     }
-// }
+void MainWindow::onClear8()
+{
+    ui->lineEdit_8_name->clear();
+    ui->lineEdit_8_shortName->clear();
+}

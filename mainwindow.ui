@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>897</width>
-    <height>494</height>
+    <width>898</width>
+    <height>594</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
       <x>0</x>
       <y>0</y>
       <width>1291</width>
-      <height>471</height>
+      <height>571</height>
      </rect>
     </property>
     <property name="toolTip">
@@ -58,7 +58,7 @@ QTabBar::tab:hover {
 }</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>5</number>
     </property>
     <property name="iconSize">
      <size>
@@ -207,7 +207,7 @@ QComboBox QAbstractItemView {
         <x>10</x>
         <y>70</y>
         <width>871</width>
-        <height>331</height>
+        <height>441</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -220,7 +220,7 @@ QComboBox QAbstractItemView {
        <enum>QFrame::NoFrame</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_1_addEI">
        <widget class="QLabel" name="label_1_enter">
@@ -295,7 +295,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -425,7 +425,7 @@ QPushButton:pressed {
 }</string>
         </property>
         <property name="placeholderText">
-         <string>Здесь будут подробности проведенной операции</string>
+         <string>Здесь будут подробности о проведенной операции</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_2_result">
@@ -497,7 +497,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -530,7 +530,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -576,31 +576,6 @@ QPushButton:pressed {
          <string>Поиск существующих ЕИ в базе данных</string>
         </property>
        </widget>
-       <widget class="QTextEdit" name="textEdit_3_searchResult">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>110</y>
-          <width>501</width>
-          <height>221</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QTextEdit {
-	border: 2px #FFF4E8;
-    padding: 0 8px;
-    border-radius: 12px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 1), 
-    								stop:1 rgba(63, 148, 108, 1));
-	color: white;
-    font-size: 14px;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Здесь будет список существующих ЕИ</string>
-        </property>
-       </widget>
        <widget class="QLabel" name="label_3_search">
         <property name="geometry">
          <rect>
@@ -618,6 +593,36 @@ QPushButton:pressed {
         </property>
         <property name="text">
          <string>Результаты запроса:</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidget_3_result">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>110</y>
+          <width>381</width>
+          <height>311</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTableWidget {
+            border: 2px solid #FFF4E8;
+            padding: 0 8px;
+            border-radius: 12px;
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                                        stop:0 rgba(88, 205, 174, 1), 
+                                        stop:1 rgba(63, 148, 108, 1));
+            color: white;
+            font-size: 14px;
+        }
+        QHeaderView::section {
+            background-color: rgba(63, 148, 108, 1);
+            color: white;
+            font-size: 14px;
+        }
+        QTableWidget::item {
+            background-color: transparent;
+        }</string>
         </property>
        </widget>
       </widget>
@@ -709,7 +714,7 @@ QComboBox QAbstractItemView {
         <x>10</x>
         <y>70</y>
         <width>871</width>
-        <height>331</height>
+        <height>431</height>
        </rect>
       </property>
       <property name="currentIndex">
@@ -831,7 +836,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -1136,7 +1141,7 @@ QComboBox QAbstractItemView {
          <rect>
           <x>20</x>
           <y>10</y>
-          <width>281</width>
+          <width>351</width>
           <height>31</height>
          </rect>
         </property>
@@ -1154,7 +1159,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -1309,7 +1314,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -1464,7 +1469,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -1588,31 +1593,6 @@ QComboBox QAbstractItemView {
          <string/>
         </property>
        </widget>
-       <widget class="QTextEdit" name="textEdit_7_result_class">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>130</y>
-          <width>371</width>
-          <height>111</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QTextEdit {
-	border: 2px #FFF4E8;
-    padding: 0 8px;
-    border-radius: 12px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 1), 
-    								stop:1 rgba(63, 148, 108, 1));
-	color: white;
-    font-size: 14px;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Здесь будет родительский класс</string>
-        </property>
-       </widget>
        <widget class="QComboBox" name="comboBox_7_className">
         <property name="geometry">
          <rect>
@@ -1691,31 +1671,6 @@ QComboBox QAbstractItemView {
          <string>Результат запроса:</string>
         </property>
        </widget>
-       <widget class="QTextEdit" name="textEdit_7_result_mainClass">
-        <property name="geometry">
-         <rect>
-          <x>480</x>
-          <y>130</y>
-          <width>371</width>
-          <height>111</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QTextEdit {
-	border: 2px #FFF4E8;
-    padding: 0 8px;
-    border-radius: 12px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 1), 
-    								stop:1 rgba(63, 148, 108, 1));
-	color: white;
-    font-size: 14px;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Здесь будут найденные потомки класса изделия</string>
-        </property>
-       </widget>
        <widget class="QLabel" name="label_7_result_mainClass">
         <property name="geometry">
          <rect>
@@ -1739,7 +1694,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>220</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -1764,6 +1719,66 @@ QPushButton:pressed {
         </property>
         <property name="text">
          <string>Поиск</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidget_7_class">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>130</y>
+          <width>371</width>
+          <height>111</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTableWidget {
+            border: 2px solid #FFF4E8;
+            padding: 0 8px;
+            border-radius: 12px;
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                                        stop:0 rgba(88, 205, 174, 1), 
+                                        stop:1 rgba(63, 148, 108, 1));
+            color: white;
+            font-size: 14px;
+        }
+        QHeaderView::section {
+            background-color: rgba(63, 148, 108, 1);
+            color: white;
+            font-size: 14px;
+        }
+        QTableWidget::item {
+            background-color: transparent;
+        }</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidget_7_mainClass">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>130</y>
+          <width>371</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTableWidget {
+            border: 2px solid #FFF4E8;
+            padding: 0 8px;
+            border-radius: 12px;
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                                        stop:0 rgba(88, 205, 174, 1), 
+                                        stop:1 rgba(63, 148, 108, 1));
+            color: white;
+            font-size: 14px;
+        }
+        QHeaderView::section {
+            background-color: rgba(63, 148, 108, 1);
+            color: white;
+            font-size: 14px;
+        }
+        QTableWidget::item {
+            background-color: transparent;
+        }</string>
         </property>
        </widget>
       </widget>
@@ -1850,7 +1865,7 @@ QComboBox QAbstractItemView {
         <x>10</x>
         <y>70</y>
         <width>871</width>
-        <height>331</height>
+        <height>451</height>
        </rect>
       </property>
       <property name="currentIndex">
@@ -1972,7 +1987,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -2217,7 +2232,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -2294,7 +2309,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -2357,31 +2372,6 @@ QPushButton:pressed {
         </property>
         <property name="text">
          <string>Выберите название класса изделия</string>
-        </property>
-       </widget>
-       <widget class="QTextEdit" name="textEdit_12_result_class">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>130</y>
-          <width>371</width>
-          <height>111</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QTextEdit {
-	border: 2px #FFF4E8;
-    padding: 0 8px;
-    border-radius: 12px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 1), 
-    								stop:1 rgba(63, 148, 108, 1));
-	color: white;
-    font-size: 14px;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Здесь будут изделия, принадлежащие выбранному классу</string>
         </property>
        </widget>
        <widget class="QComboBox" name="comboBox_12_className">
@@ -2462,36 +2452,11 @@ QComboBox QAbstractItemView {
          <string>Результат запроса:</string>
         </property>
        </widget>
-       <widget class="QTextEdit" name="textEdit_12_result_all">
-        <property name="geometry">
-         <rect>
-          <x>480</x>
-          <y>50</y>
-          <width>371</width>
-          <height>191</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QTextEdit {
-	border: 2px #FFF4E8;
-    padding: 0 8px;
-    border-radius: 12px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 1), 
-    								stop:1 rgba(63, 148, 108, 1));
-	color: white;
-    font-size: 14px;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Здесь будут найденные в базе данных изделия</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="pushButton_12_searchClass">
         <property name="geometry">
          <rect>
           <x>220</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -2516,6 +2481,66 @@ QPushButton:pressed {
         </property>
         <property name="text">
          <string>Поиск</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidget_12_result_all">
+        <property name="geometry">
+         <rect>
+          <x>470</x>
+          <y>50</y>
+          <width>371</width>
+          <height>281</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTableWidget {
+            border: 2px solid #FFF4E8;
+            padding: 0 8px;
+            border-radius: 12px;
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                                        stop:0 rgba(88, 205, 174, 1), 
+                                        stop:1 rgba(63, 148, 108, 1));
+            color: white;
+            font-size: 14px;
+        }
+        QHeaderView::section {
+            background-color: rgba(63, 148, 108, 1);
+            color: white;
+            font-size: 14px;
+        }
+        QTableWidget::item {
+            background-color: transparent;
+        }</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidget_12_resultClass">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>371</width>
+          <height>211</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTableWidget {
+            border: 2px solid #FFF4E8;
+            padding: 0 8px;
+            border-radius: 12px;
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                                        stop:0 rgba(88, 205, 174, 1), 
+                                        stop:1 rgba(63, 148, 108, 1));
+            color: white;
+            font-size: 14px;
+        }
+        QHeaderView::section {
+            background-color: rgba(63, 148, 108, 1);
+            color: white;
+            font-size: 14px;
+        }
+        QTableWidget::item {
+            background-color: transparent;
+        }</string>
         </property>
        </widget>
       </widget>
@@ -2607,7 +2632,7 @@ QComboBox QAbstractItemView {
         <x>10</x>
         <y>70</y>
         <width>871</width>
-        <height>331</height>
+        <height>431</height>
        </rect>
       </property>
       <property name="currentIndex">
@@ -2618,7 +2643,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -2667,7 +2692,7 @@ QPushButton:pressed {
 }</string>
         </property>
         <property name="placeholderText">
-         <string>Здесь будет информация о </string>
+         <string>Здесь будут подробности о проведенной операции</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_13_result">
@@ -3005,7 +3030,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -3202,7 +3227,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>220</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -3279,7 +3304,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -3329,7 +3354,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>220</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -3543,7 +3568,7 @@ QComboBox QAbstractItemView {
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>30</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -3570,36 +3595,11 @@ QPushButton:pressed {
          <string>Поиск</string>
         </property>
        </widget>
-       <widget class="QTextEdit" name="textEdit_18_result">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>170</y>
-          <width>521</width>
-          <height>161</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QTextEdit {
-	border: 2px #FFF4E8;
-    padding: 0 8px;
-    border-radius: 12px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 1), 
-    								stop:1 rgba(63, 148, 108, 1));
-	color: white;
-    font-size: 14px;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Здесь будет информация о </string>
-        </property>
-       </widget>
        <widget class="QLabel" name="label_18_result">
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>130</y>
+          <y>80</y>
           <width>281</width>
           <height>31</height>
          </rect>
@@ -3638,7 +3638,7 @@ QPushButton:pressed {
          <rect>
           <x>20</x>
           <y>50</y>
-          <width>361</width>
+          <width>371</width>
           <height>28</height>
          </rect>
         </property>
@@ -3692,6 +3692,36 @@ QComboBox QAbstractItemView {
          <string/>
         </property>
        </widget>
+       <widget class="QTableWidget" name="tableWidget_18_result">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>831</width>
+          <height>281</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTableWidget {
+            border: 2px solid #FFF4E8;
+            padding: 0 8px;
+            border-radius: 12px;
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                                        stop:0 rgba(88, 205, 174, 1), 
+                                        stop:1 rgba(63, 148, 108, 1));
+            color: white;
+            font-size: 14px;
+        }
+        QHeaderView::section {
+            background-color: rgba(63, 148, 108, 1);
+            color: white;
+            font-size: 14px;
+        }
+        QTableWidget::item {
+            background-color: transparent;
+        }</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </widget>
@@ -3705,18 +3735,324 @@ QComboBox QAbstractItemView {
         <x>10</x>
         <y>70</y>
         <width>871</width>
-        <height>331</height>
+        <height>431</height>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>5</number>
       </property>
+      <widget class="QWidget" name="page_16">
+       <widget class="QComboBox" name="comboBox_16_idParam">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>50</y>
+          <width>371</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+	border: 2px #FFE5CC;
+    border-radius: 12px;
+	padding: 0 8px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    font-size: 14px;
+	color: rgba(255, 255, 255,1);
+}
+
+QComboBox:!editable, QComboBox::drop-down:editable {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+    subcontrol-position: top right;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 12px; 
+    border-bottom-left-radius: 12px;
+}
+
+
+QComboBox QAbstractItemView {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    color: rgb(255, 255, 255);
+	border: 1px #FFE5CC;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_16_idParam">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>371</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Выберите ИД параметра</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_16_add">
+        <property name="geometry">
+         <rect>
+          <x>680</x>
+          <y>350</y>
+          <width>171</width>
+          <height>71</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+    								stop:0 rgba(88, 205, 174, 1), 
+    								stop:1 rgba(63, 148, 108, 1));
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 12px;
+}
+
+QPushButton:pressed {
+	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+    								stop:0 rgba(88, 205, 174, 0.5), 
+    								stop:1 rgba(63, 148, 108, 0.5));
+}</string>
+        </property>
+        <property name="text">
+         <string>Добавить</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox_16_idClass">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>371</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+	border: 2px #FFE5CC;
+    border-radius: 12px;
+	padding: 0 8px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    font-size: 14px;
+	color: rgba(255, 255, 255,1);
+}
+
+QComboBox:!editable, QComboBox::drop-down:editable {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+    subcontrol-position: top right;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 12px; 
+    border-bottom-left-radius: 12px;
+}
+
+
+QComboBox QAbstractItemView {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    color: rgb(255, 255, 255);
+	border: 1px #FFE5CC;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_16_idClass">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>80</y>
+          <width>331</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Выберите ИД класса</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_16_maxVal">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>230</y>
+          <width>371</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+	border: 2px #FFE5CC;
+    border-radius: 12px;
+	padding: 0 8px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+	selection-background-color: darkgray;
+    font-size: 14px;
+	color: rgba(255, 255, 255,1);
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Максимальное значение</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_16_result">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>10</y>
+          <width>281</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Результат добавления:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_16_data">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>152</y>
+          <width>361</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Введите значения для параметра</string>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="textEdit_16_result">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>50</y>
+          <width>371</width>
+          <height>161</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTextEdit {
+	border: 2px #FFF4E8;
+    padding: 0 8px;
+    border-radius: 12px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+    								stop:0 rgba(88, 205, 174, 1), 
+    								stop:1 rgba(63, 148, 108, 1));
+	color: white;
+    font-size: 14px;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Здесь будут подробности о проведенной операции</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_16_minVal">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>190</y>
+          <width>371</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+	border: 2px #FFE5CC;
+    border-radius: 12px;
+	padding: 0 8px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+	selection-background-color: darkgray;
+    font-size: 14px;
+	color: rgba(255, 255, 255,1);
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Минимальное значение</string>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="page_19">
        <widget class="QPushButton" name="pushButton_19_add">
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -3765,7 +4101,7 @@ QPushButton:pressed {
 }</string>
         </property>
         <property name="placeholderText">
-         <string>Здесь будет информация о </string>
+         <string>Здесь будут подробности о проведенной операции</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_19_result">
@@ -3966,651 +4302,8 @@ QComboBox QAbstractItemView {
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="page_16">
-       <widget class="QComboBox" name="comboBox_14_idEnum_2">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>50</y>
-          <width>371</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QComboBox {
-	border: 2px #FFE5CC;
-    border-radius: 12px;
-	padding: 0 8px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-    font-size: 14px;
-	color: rgba(255, 255, 255,1);
-}
-
-QComboBox:!editable, QComboBox::drop-down:editable {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-}
-
-QComboBox:!editable:on, QComboBox::drop-down:editable:on {
-     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-}
-
-QComboBox::drop-down {
-	subcontrol-origin: padding;
-    subcontrol-position: top right;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
-    border-top-left-radius: 12px; 
-    border-bottom-left-radius: 12px;
-}
-
-
-QComboBox QAbstractItemView {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-    color: rgb(255, 255, 255);
-	border: 1px #FFE5CC;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_14_idEnum_2">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>10</y>
-          <width>371</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-	color: rgba(83, 93, 167, 1);
-    font-size: 17px;
-}</string>
-        </property>
-        <property name="text">
-         <string>Выберите ИД параметра</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_14_deleteVal_2">
-        <property name="geometry">
-         <rect>
-          <x>680</x>
-          <y>260</y>
-          <width>171</width>
-          <height>71</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 1), 
-    								stop:1 rgba(63, 148, 108, 1));
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    border-radius: 12px;
-}
-
-QPushButton:pressed {
-	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 0.5), 
-    								stop:1 rgba(63, 148, 108, 0.5));
-}</string>
-        </property>
-        <property name="text">
-         <string>Добавить</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="comboBox_14_idVal_2">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>120</y>
-          <width>371</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QComboBox {
-	border: 2px #FFE5CC;
-    border-radius: 12px;
-	padding: 0 8px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-    font-size: 14px;
-	color: rgba(255, 255, 255,1);
-}
-
-QComboBox:!editable, QComboBox::drop-down:editable {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-}
-
-QComboBox:!editable:on, QComboBox::drop-down:editable:on {
-     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-}
-
-QComboBox::drop-down {
-	subcontrol-origin: padding;
-    subcontrol-position: top right;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
-    border-top-left-radius: 12px; 
-    border-bottom-left-radius: 12px;
-}
-
-
-QComboBox QAbstractItemView {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-    color: rgb(255, 255, 255);
-	border: 1px #FFE5CC;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_14_idVal_2">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>80</y>
-          <width>331</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-	color: rgba(83, 93, 167, 1);
-    font-size: 17px;
-}</string>
-        </property>
-        <property name="text">
-         <string>Выберите ИД класса</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_19_shortName_2">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>230</y>
-          <width>371</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLineEdit {
-	border: 2px #FFE5CC;
-    border-radius: 12px;
-	padding: 0 8px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-	selection-background-color: darkgray;
-    font-size: 14px;
-	color: rgba(255, 255, 255,1);
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Максимальное значение</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_19_result_2">
-        <property name="geometry">
-         <rect>
-          <x>480</x>
-          <y>10</y>
-          <width>281</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-	color: rgba(83, 93, 167, 1);
-    font-size: 17px;
-}</string>
-        </property>
-        <property name="text">
-         <string>Результат добавления:</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_19_data_2">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>152</y>
-          <width>361</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-	color: rgba(83, 93, 167, 1);
-    font-size: 17px;
-}</string>
-        </property>
-        <property name="text">
-         <string>Введите значения для параметра</string>
-        </property>
-       </widget>
-       <widget class="QTextEdit" name="textEdit_19_result_2">
-        <property name="geometry">
-         <rect>
-          <x>480</x>
-          <y>50</y>
-          <width>371</width>
-          <height>161</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QTextEdit {
-	border: 2px #FFF4E8;
-    padding: 0 8px;
-    border-radius: 12px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 1), 
-    								stop:1 rgba(63, 148, 108, 1));
-	color: white;
-    font-size: 14px;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Здесь будет информация о </string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_19_add_2">
-        <property name="geometry">
-         <rect>
-          <x>680</x>
-          <y>332</y>
-          <width>171</width>
-          <height>71</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 1), 
-    								stop:1 rgba(63, 148, 108, 1));
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    border-radius: 12px;
-}
-
-QPushButton:pressed {
-	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 0.5), 
-    								stop:1 rgba(63, 148, 108, 0.5));
-}</string>
-        </property>
-        <property name="text">
-         <string>Добавить</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_19_name_2">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>190</y>
-          <width>371</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLineEdit {
-	border: 2px #FFE5CC;
-    border-radius: 12px;
-	padding: 0 8px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-	selection-background-color: darkgray;
-    font-size: 14px;
-	color: rgba(255, 255, 255,1);
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Минимальное значение</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="page_22">
-       <widget class="QLabel" name="label_14_idEnum_3">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>10</y>
-          <width>371</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-	color: rgba(83, 93, 167, 1);
-    font-size: 17px;
-}</string>
-        </property>
-        <property name="text">
-         <string>Выберите ИД изделия</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="comboBox_14_idEnum_3">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>50</y>
-          <width>371</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QComboBox {
-	border: 2px #FFE5CC;
-    border-radius: 12px;
-	padding: 0 8px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-    font-size: 14px;
-	color: rgba(255, 255, 255,1);
-}
-
-QComboBox:!editable, QComboBox::drop-down:editable {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-}
-
-QComboBox:!editable:on, QComboBox::drop-down:editable:on {
-     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-}
-
-QComboBox::drop-down {
-	subcontrol-origin: padding;
-    subcontrol-position: top right;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
-    border-top-left-radius: 12px; 
-    border-bottom-left-radius: 12px;
-}
-
-
-QComboBox QAbstractItemView {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-    color: rgb(255, 255, 255);
-	border: 1px #FFE5CC;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_19_result_3">
-        <property name="geometry">
-         <rect>
-          <x>480</x>
-          <y>10</y>
-          <width>281</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-	color: rgba(83, 93, 167, 1);
-    font-size: 17px;
-}</string>
-        </property>
-        <property name="text">
-         <string>Результат операции:</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_19_data_3">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>152</y>
-          <width>361</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-	color: rgba(83, 93, 167, 1);
-    font-size: 17px;
-}</string>
-        </property>
-        <property name="text">
-         <string>Введите значения для параметра</string>
-        </property>
-       </widget>
-       <widget class="QTextEdit" name="textEdit_19_result_3">
-        <property name="geometry">
-         <rect>
-          <x>480</x>
-          <y>50</y>
-          <width>371</width>
-          <height>161</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QTextEdit {
-	border: 2px #FFF4E8;
-    padding: 0 8px;
-    border-radius: 12px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 1), 
-    								stop:1 rgba(63, 148, 108, 1));
-	color: white;
-    font-size: 14px;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Здесь будет информация о </string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_14_deleteVal_3">
-        <property name="geometry">
-         <rect>
-          <x>680</x>
-          <y>260</y>
-          <width>171</width>
-          <height>71</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 1), 
-    								stop:1 rgba(63, 148, 108, 1));
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    border-radius: 12px;
-}
-
-QPushButton:pressed {
-	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
-    								stop:0 rgba(88, 205, 174, 0.5), 
-    								stop:1 rgba(63, 148, 108, 0.5));
-}</string>
-        </property>
-        <property name="text">
-         <string>Записать</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_14_idVal_3">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>80</y>
-          <width>331</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-	color: rgba(83, 93, 167, 1);
-    font-size: 17px;
-}</string>
-        </property>
-        <property name="text">
-         <string>Выберите ИД класса</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="comboBox_14_idVal_3">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>120</y>
-          <width>371</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QComboBox {
-	border: 2px #FFE5CC;
-    border-radius: 12px;
-	padding: 0 8px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-    font-size: 14px;
-	color: rgba(255, 255, 255,1);
-}
-
-QComboBox:!editable, QComboBox::drop-down:editable {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-}
-
-QComboBox:!editable:on, QComboBox::drop-down:editable:on {
-     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-}
-
-QComboBox::drop-down {
-	subcontrol-origin: padding;
-    subcontrol-position: top right;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
-    border-top-left-radius: 12px; 
-    border-bottom-left-radius: 12px;
-}
-
-
-QComboBox QAbstractItemView {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-    color: rgb(255, 255, 255);
-	border: 1px #FFE5CC;
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_19_shortName_3">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>230</y>
-          <width>371</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLineEdit {
-	border: 2px #FFE5CC;
-    border-radius: 12px;
-	padding: 0 8px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-	selection-background-color: darkgray;
-    font-size: 14px;
-	color: rgba(255, 255, 255,1);
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Строковое значение</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_19_name_3">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>190</y>
-          <width>371</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLineEdit {
-	border: 2px #FFE5CC;
-    border-radius: 12px;
-	padding: 0 8px;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-    												stop:0 rgba(193, 95, 251, 1), 
-													stop:0.6 rgba(97, 115, 241, 0.7),
-    												stop:1 rgba(94, 131, 239, 0.7));
-	selection-background-color: darkgray;
-    font-size: 14px;
-	color: rgba(255, 255, 255,1);
-}</string>
-        </property>
-        <property name="placeholderText">
-         <string>Числовое значение</string>
-        </property>
-       </widget>
-      </widget>
       <widget class="QWidget" name="page_23">
-       <widget class="QComboBox" name="comboBox_14_idEnum_4">
+       <widget class="QComboBox" name="comboBox_23_idProd">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -4688,11 +4381,11 @@ QComboBox QAbstractItemView {
          <string>Введите значения для параметра</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_14_deleteVal_4">
+       <widget class="QPushButton" name="pushButton_23_add">
         <property name="geometry">
          <rect>
           <x>680</x>
-          <y>260</y>
+          <y>350</y>
           <width>171</width>
           <height>71</height>
          </rect>
@@ -4719,13 +4412,13 @@ QPushButton:pressed {
          <string>Записать</string>
         </property>
        </widget>
-       <widget class="QTextEdit" name="textEdit_19_result_4">
+       <widget class="QTextEdit" name="textEdit_23_result">
         <property name="geometry">
          <rect>
           <x>480</x>
-          <y>50</y>
+          <y>120</y>
           <width>371</width>
-          <height>161</height>
+          <height>101</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -4741,14 +4434,14 @@ QPushButton:pressed {
 }</string>
         </property>
         <property name="placeholderText">
-         <string>Здесь будет информация о </string>
+         <string>Здесь будут подробности о проведенной операции</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_19_result_4">
         <property name="geometry">
          <rect>
           <x>480</x>
-          <y>10</y>
+          <y>80</y>
           <width>281</width>
           <height>31</height>
          </rect>
@@ -4779,10 +4472,10 @@ QPushButton:pressed {
 }</string>
         </property>
         <property name="text">
-         <string>Выберите ИД класса</string>
+         <string>Выберите ИД параметра</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox_14_idVal_4">
+       <widget class="QComboBox" name="comboBox_23_idParam">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -4841,7 +4534,7 @@ QComboBox QAbstractItemView {
          <string/>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_19_name_4">
+       <widget class="QLineEdit" name="lineEdit_23_val">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -4887,7 +4580,7 @@ QComboBox QAbstractItemView {
          <string>Выберите ИД изделия</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_19_shortName_4">
+       <widget class="QLineEdit" name="lineEdit_23_str">
         <property name="geometry">
          <rect>
           <x>180</x>
@@ -4914,7 +4607,7 @@ QComboBox QAbstractItemView {
          <string>Строковое значение</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_19_name_5">
+       <widget class="QLineEdit" name="lineEdit_23_note">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -4938,20 +4631,20 @@ QComboBox QAbstractItemView {
 }</string>
         </property>
         <property name="placeholderText">
-         <string>Перечисление</string>
+         <string>Дополнительная информация</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_19_shortName_5">
+       <widget class="QComboBox" name="comboBox_23_idEnum">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>270</y>
+          <x>480</x>
+          <y>50</y>
           <width>371</width>
-          <height>31</height>
+          <height>28</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QLineEdit {
+         <string notr="true">QComboBox {
 	border: 2px #FFE5CC;
     border-radius: 12px;
 	padding: 0 8px;
@@ -4959,13 +4652,617 @@ QComboBox QAbstractItemView {
     												stop:0 rgba(193, 95, 251, 1), 
 													stop:0.6 rgba(97, 115, 241, 0.7),
     												stop:1 rgba(94, 131, 239, 0.7));
-	selection-background-color: darkgray;
     font-size: 14px;
 	color: rgba(255, 255, 255,1);
+}
+
+QComboBox:!editable, QComboBox::drop-down:editable {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+    subcontrol-position: top right;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 12px; 
+    border-bottom-left-radius: 12px;
+}
+
+
+QComboBox QAbstractItemView {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    color: rgb(255, 255, 255);
+	border: 1px #FFE5CC;
 }</string>
         </property>
         <property name="placeholderText">
-         <string>Дополнительная информация</string>
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_14_idVal_5">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>10</y>
+          <width>331</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Выберите ИД перечисления</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_25">
+       <widget class="QPushButton" name="pushButton_25_copy">
+        <property name="geometry">
+         <rect>
+          <x>680</x>
+          <y>350</y>
+          <width>171</width>
+          <height>71</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+    								stop:0 rgba(88, 205, 174, 1), 
+    								stop:1 rgba(63, 148, 108, 1));
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 12px;
+}
+
+QPushButton:pressed {
+	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+    								stop:0 rgba(88, 205, 174, 0.5), 
+    								stop:1 rgba(63, 148, 108, 0.5));
+}</string>
+        </property>
+        <property name="text">
+         <string>Копировать</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_14_idEnum_6">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>371</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Выберите ИД класса изделия</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox_25_class">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>50</y>
+          <width>371</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+	border: 2px #FFE5CC;
+    border-radius: 12px;
+	padding: 0 8px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    font-size: 14px;
+	color: rgba(255, 255, 255,1);
+}
+
+QComboBox:!editable, QComboBox::drop-down:editable {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+    subcontrol-position: top right;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 12px; 
+    border-bottom-left-radius: 12px;
+}
+
+
+QComboBox QAbstractItemView {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    color: rgb(255, 255, 255);
+	border: 1px #FFE5CC;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox_25_mainClass">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>371</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+	border: 2px #FFE5CC;
+    border-radius: 12px;
+	padding: 0 8px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    font-size: 14px;
+	color: rgba(255, 255, 255,1);
+}
+
+QComboBox:!editable, QComboBox::drop-down:editable {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+    subcontrol-position: top right;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 12px; 
+    border-bottom-left-radius: 12px;
+}
+
+
+QComboBox QAbstractItemView {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    color: rgb(255, 255, 255);
+	border: 1px #FFE5CC;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_19_result_6">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>150</y>
+          <width>281</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Результат операции:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_14_idVal_8">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>80</y>
+          <width>391</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Выберите ИД родительского класса изделия</string>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="textEdit_25_result">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>190</y>
+          <width>371</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTextEdit {
+	border: 2px #FFF4E8;
+    padding: 0 8px;
+    border-radius: 12px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+    								stop:0 rgba(88, 205, 174, 1), 
+    								stop:1 rgba(63, 148, 108, 1));
+	color: white;
+    font-size: 14px;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Здесь будут подробности о проведенной операции</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_26">
+       <widget class="QLabel" name="label_14_idEnum_8">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>371</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Выберите ИД изделия</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_19_result_8">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>80</y>
+          <width>281</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Результат операции:</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_26_prod">
+        <property name="geometry">
+         <rect>
+          <x>680</x>
+          <y>30</y>
+          <width>171</width>
+          <height>71</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+    								stop:0 rgba(88, 205, 174, 1), 
+    								stop:1 rgba(63, 148, 108, 1));
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 12px;
+}
+
+QPushButton:pressed {
+	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+    								stop:0 rgba(88, 205, 174, 0.5), 
+    								stop:1 rgba(63, 148, 108, 0.5));
+}</string>
+        </property>
+        <property name="text">
+         <string>Найти</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox_26_idProd">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>50</y>
+          <width>371</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+	border: 2px #FFE5CC;
+    border-radius: 12px;
+	padding: 0 8px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    font-size: 14px;
+	color: rgba(255, 255, 255,1);
+}
+
+QComboBox:!editable, QComboBox::drop-down:editable {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+    subcontrol-position: top right;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 12px; 
+    border-bottom-left-radius: 12px;
+}
+
+
+QComboBox QAbstractItemView {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    color: rgb(255, 255, 255);
+	border: 1px #FFE5CC;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidget_26_prod">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>831</width>
+          <height>281</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTableWidget {
+            border: 2px solid #FFF4E8;
+            padding: 0 8px;
+            border-radius: 12px;
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                                        stop:0 rgba(88, 205, 174, 1), 
+                                        stop:1 rgba(63, 148, 108, 1));
+            color: white;
+            font-size: 14px;
+        }
+        QHeaderView::section {
+            background-color: rgba(63, 148, 108, 1);
+            color: white;
+            font-size: 14px;
+        }
+        QTableWidget::item {
+            background-color: transparent;
+        }</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_27">
+       <widget class="QLabel" name="label_19_result_9">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>80</y>
+          <width>281</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Результат операции:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_14_idEnum_9">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>371</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+	color: rgba(83, 93, 167, 1);
+    font-size: 17px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Выберите ИД класса изделия</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_26_search">
+        <property name="geometry">
+         <rect>
+          <x>680</x>
+          <y>30</y>
+          <width>171</width>
+          <height>71</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+    								stop:0 rgba(88, 205, 174, 1), 
+    								stop:1 rgba(63, 148, 108, 1));
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 12px;
+}
+
+QPushButton:pressed {
+	background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+    								stop:0 rgba(88, 205, 174, 0.5), 
+    								stop:1 rgba(63, 148, 108, 0.5));
+}</string>
+        </property>
+        <property name="text">
+         <string>Найти</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox_26_idClass">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>50</y>
+          <width>371</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+	border: 2px #FFE5CC;
+    border-radius: 12px;
+	padding: 0 8px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    font-size: 14px;
+	color: rgba(255, 255, 255,1);
+}
+
+QComboBox:!editable, QComboBox::drop-down:editable {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+}
+
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+    subcontrol-position: top right;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 12px; 
+    border-bottom-left-radius: 12px;
+}
+
+
+QComboBox QAbstractItemView {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+    												stop:0 rgba(193, 95, 251, 1), 
+													stop:0.6 rgba(97, 115, 241, 0.7),
+    												stop:1 rgba(94, 131, 239, 0.7));
+    color: rgb(255, 255, 255);
+	border: 1px #FFE5CC;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidget_26_search">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>831</width>
+          <height>281</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTableWidget {
+            border: 2px solid #FFF4E8;
+            padding: 0 8px;
+            border-radius: 12px;
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                                        stop:0 rgba(88, 205, 174, 1), 
+                                        stop:1 rgba(63, 148, 108, 1));
+            color: white;
+            font-size: 14px;
+        }
+        QHeaderView::section {
+            background-color: rgba(63, 148, 108, 1);
+            color: white;
+            font-size: 14px;
+        }
+        QTableWidget::item {
+            background-color: transparent;
+        }</string>
         </property>
        </widget>
       </widget>
@@ -5027,22 +5324,32 @@ QComboBox QAbstractItemView {
       </property>
       <item>
        <property name="text">
-        <string>Добавить данные о клиенте</string>
+        <string>Добавить данные параметра для заданного класса</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Удалить данные о работнике</string>
+        <string>Добавить новый параметр</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Изменить номер госрегистрации</string>
+        <string>Добавить значение параметра экземпляра</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Добавить данные об автомобиле</string>
+        <string>Копировать параметры родительского класса</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Найти значения параметров класса</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Найти значения параметров изделия</string>
        </property>
       </item>
      </widget>
