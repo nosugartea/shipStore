@@ -122,6 +122,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->comboBox_26_idProd, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox26Prod);
     connect(ui->comboBox_26_idClass, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox26Class);
 
+    connect(ui->pushButton_28_search, &QPushButton::clicked, this, &MainWindow::onMyButtonClickSearch_28);
+    connect(ui->comboBox_28_idParam, &QComboBox::currentTextChanged, this, &MainWindow::onComboBox28Param);
+
     // CLEAR BUTTON
     connect(ui->pushButton_4_clear, &QPushButton::clicked, this, &MainWindow::onClear4);
     connect(ui->pushButton_8_clear, &QPushButton::clicked, this, &MainWindow::onClear8);
@@ -132,37 +135,121 @@ void MainWindow::handleLogin() {
     QString password = loginDialog->getPassword();
 
     if (username == "admin" && password == "1234") {
-        ui->stackedWidget_EI->setCurrentIndex(0);
         ui->stackedWidget_class->setCurrentIndex(0);
         ui->stackedWidget_prod->setCurrentIndex(0);
         ui->stackedWidget_enum->setCurrentIndex(0);
         ui->stackedWidget_param->setCurrentIndex(0);
+        ui->stackedWidget_EI->setCurrentIndex(0);
+
+        QString text =
+            "<p>Основные функции приложения</p>"
+            "<ul>"
+            "<li>Единицы измерения"
+            "  <ul>"
+            "    <li>Вывод списка единиц измерения</li>"
+            "  </ul>"
+            "</li>"
+            "<li>Классы"
+            "  <ul>"
+            "    <li>Поиск родительского класса</li>"
+            "    <li>Поиск классов наследников</li>"
+            "  </ul>"
+            "</li>"
+            "<li>Изделия"
+            "  <ul>"
+            "    <li>Поиск изделий заданного класса</li>"
+            "    <li>Вывод всех изделий</li>"
+            "  </ul>"
+            "</li>"
+            "<li>Перечисления"
+            "  <ul>"
+            "    <li>Поиск всех значений заданного перечисления</li>"
+            "  </ul>"
+            "</li>"
+            "<li>Параметры"
+            "  <ul>"
+            "    <li>Поиск значения параметров изделия</li>"
+            "    <li>Поиск значения параметров класса</li>"
+            "    <li>Поиск изделия по значению параметра</li>"
+            "  </ul>"
+            "</li>"
+            "</ul>"
+            "<p>Бригада: Васильцева А. А; Кубрина Е; Макшаков Д. Д.</p>";
+        ui->textEdit->setHtml(text);
     } else {
-        ui->stackedWidget_EI->setCurrentIndex(2);
-        ui->comboBox_EI->removeItem(0);
-        ui->comboBox_EI->removeItem(0);
+        ui->stackedWidget_EI->setCurrentIndex(0);
+        ui->comboBox_EI->removeItem(1);
+        ui->comboBox_EI->removeItem(1);
 
-        ui->stackedWidget_class->setCurrentIndex(3);
-        ui->comboBox_class->removeItem(0);
-        ui->comboBox_class->removeItem(0);
-        ui->comboBox_class->removeItem(0);
+        ui->stackedWidget_class->setCurrentIndex(0);
+        ui->comboBox_class->removeItem(1);
+        ui->comboBox_class->removeItem(1);
+        ui->comboBox_class->removeItem(1);
 
-        ui->stackedWidget_prod->setCurrentIndex(2);
-        ui->comboBox_prod->removeItem(0);
-        ui->comboBox_prod->removeItem(0);
+        ui->stackedWidget_prod->setCurrentIndex(0);
+        ui->comboBox_prod->removeItem(1);
+        ui->comboBox_prod->removeItem(1);
 
-        ui->stackedWidget_enum->setCurrentIndex(3);
-        ui->comboBox_enum->removeItem(0);
-        ui->comboBox_enum->removeItem(0);
-        ui->comboBox_enum->removeItem(0);
+        ui->stackedWidget_enum->setCurrentIndex(0);
+        ui->comboBox_enum->removeItem(1);
+        ui->comboBox_enum->removeItem(1);
+        ui->comboBox_enum->removeItem(1);
 
-        ui->stackedWidget_param->setCurrentIndex(6);
-        ui->comboBox_param->removeItem(0);
-        ui->comboBox_param->removeItem(0);
-        ui->comboBox_param->removeItem(0);
-        ui->comboBox_param->removeItem(0);
-        ui->comboBox_param->removeItem(0);
-        ui->comboBox_param->removeItem(0);
+        ui->stackedWidget_param->setCurrentIndex(0);
+        ui->comboBox_param->removeItem(3);
+        ui->comboBox_param->removeItem(3);
+        ui->comboBox_param->removeItem(3);
+        ui->comboBox_param->removeItem(3);
+        ui->comboBox_param->removeItem(3);
+
+        QString text =
+            "<p>Основные функции приложения</p>"
+            "<ul>"
+            "<li>Единицы измерения"
+            "  <ul>"
+            "    <li>Вывод списка единиц измерения</li>"
+            "    <li>Добавление новой единицы измерения</li>"
+            "    <li>Удаление существующей единицы измерения</li>"
+            "  </ul>"
+            "</li>"
+            "<li>Классы"
+            "  <ul>"
+            "    <li>Поиск родительского класса</li>"
+            "    <li>Поиск классов наследников</li>"
+            "    <li>Добавление нового класса</li>"
+            "    <li>Удаление существующего класса</li>"
+            "    <li>Изменение родительского класса у класса</li>"
+            "  </ul>"
+            "</li>"
+            "<li>Изделия"
+            "  <ul>"
+            "    <li>Поиск изделий заданного класса</li>"
+            "    <li>Вывод всех изделий</li>"
+            "    <li>Добавление изделия в базу данных</li>"
+            "    <li>Удаление изделия из базы данных</li>"
+            "  </ul>"
+            "</li>"
+            "<li>Перечисления"
+            "  <ul>"
+            "    <li>Поиск всех значений заданного перечисления</li>"
+            "    <li>Добавление значения перечисления</li>"
+            "    <li>Удаление значения перечисления</li>"
+            "    <li>Перемещение значения перечисления вверх/вниз</li>"
+            "  </ul>"
+            "</li>"
+            "<li>Параметры"
+            "  <ul>"
+            "    <li>Поиск значения параметров изделия</li>"
+            "    <li>Поиск значения параметров класса</li>"
+            "    <li>Поиск изделия по значению параметра</li>"
+            "    <li>Добавление значения параметров экземпляра</li>"
+            "    <li>Добавление нового параметра</li>"
+            "    <li>Копирование параметров родительского класса</li>"
+            "  </ul>"
+            "</li>"
+            "</ul>"
+            "<p>Бригада: Васильцева А. А; Кубрина Е; Макшаков Д. Д.</p>";
+        ui->textEdit->setHtml(text);
     }
 }
 
@@ -233,17 +320,16 @@ void MainWindow::setTables()
     ui->tableWidget_18_result->setColumnWidth(4, 450);
 
     ui->tableWidget_26_prod->setRowCount(0);
-    ui->tableWidget_26_prod->setColumnCount(9);
-    headers = {"ID пары", "Сокращ", "Название", "Числовое зн.", "ЕИ", "Строк. знач.", "ID переч", "Значение", "OBLOB"};
+    ui->tableWidget_26_prod->setColumnCount(8);
+    headers = {"ID пары", "Сокращ", "Название", "Числовое зн.", "ЕИ", "Строк. знач.", "Значение", "OBLOB"};
     ui->tableWidget_26_prod->setHorizontalHeaderLabels(headers);
     ui->tableWidget_26_prod->setColumnWidth(0, 50);
     ui->tableWidget_26_prod->setColumnWidth(1, 50);
-    ui->tableWidget_26_prod->setColumnWidth(2, 160);
+    ui->tableWidget_26_prod->setColumnWidth(2, 240);
     ui->tableWidget_26_prod->setColumnWidth(3, 150);
     ui->tableWidget_26_prod->setColumnWidth(4, 50);
-    ui->tableWidget_26_prod->setColumnWidth(5, 60);
-    ui->tableWidget_26_prod->setColumnWidth(6, 150);
-    ui->tableWidget_26_prod->setColumnWidth(7, 50);
+    ui->tableWidget_26_prod->setColumnWidth(5, 80);
+    ui->tableWidget_26_prod->setColumnWidth(7, 80);
     ui->tableWidget_26_prod->setColumnWidth(8, 130);
 
     ui->tableWidget_26_search->setRowCount(0);
@@ -257,6 +343,15 @@ void MainWindow::setTables()
     ui->tableWidget_26_search->setColumnWidth(4, 100);
     ui->tableWidget_26_search->setColumnWidth(5, 50);
     ui->tableWidget_26_search->setColumnWidth(6, 120);
+
+    ui->tableWidget_28_search->setRowCount(0);
+    ui->tableWidget_28_search->setColumnCount(4);
+    headers = {"ID", "Название", "Мин. зн.", "Макс. зн."};
+    ui->tableWidget_28_search->setHorizontalHeaderLabels(headers);
+    ui->tableWidget_28_search->setColumnWidth(0, 100);
+    ui->tableWidget_28_search->setColumnWidth(1, 430);
+    ui->tableWidget_28_search->setColumnWidth(2, 150);
+    ui->tableWidget_28_search->setColumnWidth(2, 150);
 }
 
 void MainWindow::onComboBoxEI(const QString &text)
@@ -302,6 +397,7 @@ void MainWindow::onComboBoxParam(const QString &text)
     if (index != -1) {
         ui->stackedWidget_param->setCurrentIndex(index);
     }
+    setComboBoxParam();
 }
 
 void MainWindow::setComboBoxEI()
@@ -491,7 +587,6 @@ void MainWindow::setComboBoxEnum()
     ui->comboBox_13_idEnum->clear();
     ui->comboBox_14_idEnum->clear();
     ui->comboBox_18_idEnum->clear();
-    ui->comboBox_23_idEnum->clear();
 
     QSqlQuery query;
     query.prepare("SELECT ID_CLASS, NAME FROM CHEM_CLASS ORDER BY ID_CLASS;");
@@ -504,7 +599,6 @@ void MainWindow::setComboBoxEnum()
                 ui->comboBox_13_idEnum->addItem(combined);
                 ui->comboBox_14_idEnum->addItem(combined);
                 ui->comboBox_18_idEnum->addItem(combined);
-                ui->comboBox_23_idEnum->addItem(combined);
             }
         }
         idEnum_13 = ui->comboBox_13_idEnum->itemText(0);
@@ -525,12 +619,6 @@ void MainWindow::setComboBoxEnum()
         if (match.hasMatch()) {
             idEnum_18 = match.captured(1);
         }
-        idEnum_23 = ui->comboBox_23_idEnum->itemText(0);
-        static const QRegularExpression re4("ID\\s*=\\s*(\\d+)");
-        match = re4.match(idEnum_23);
-        if (match.hasMatch()) {
-            idEnum_23 = match.captured(1);
-        }
     }
 }
 
@@ -539,6 +627,7 @@ void MainWindow::setComboBoxVal()
     ui->comboBox_14_idVal->clear();
     ui->comboBox_17_down->clear();
     ui->comboBox_17_up->clear();
+    ui->comboBox_23_idEnum->clear();
     QSqlQuery query;
     query.prepare("SELECT ID_POS, E_NAME "
                   "FROM POS_ENUM ORDER BY ID_POS, ID_ENUM;");
@@ -550,6 +639,7 @@ void MainWindow::setComboBoxVal()
             ui->comboBox_14_idVal->addItem(combined);
             ui->comboBox_17_down->addItem(combined);
             ui->comboBox_17_up->addItem(combined);
+            ui->comboBox_23_idEnum->addItem(combined);
         }
         idVal_14 = ui->comboBox_14_idVal->itemText(0);
         static const QRegularExpression re1("ID\\s*=\\s*(\\d+)");
@@ -569,6 +659,12 @@ void MainWindow::setComboBoxVal()
         if (match.hasMatch()) {
             idUp_17 = match.captured(1);
         }
+        idEnum_23 = ui->comboBox_23_idEnum->itemText(0);
+        static const QRegularExpression re4("ID\\s*=\\s*(\\d+)");
+        match = re4.match(idEnum_23);
+        if (match.hasMatch()) {
+            idEnum_23 = match.captured(1);
+        }
     }
 }
 
@@ -576,6 +672,7 @@ void MainWindow::setComboBoxParam()
 {
     ui->comboBox_16_idParam->clear();
     ui->comboBox_23_idParam->clear();
+    ui->comboBox_28_idParam->clear();
     QSqlQuery query;
     query.prepare("SELECT * FROM PARAMETR1 ORDER BY ID_PAR;");
     if (query.exec()) {
@@ -585,6 +682,7 @@ void MainWindow::setComboBoxParam()
             QString combined = "ID = " + id_pos + ": " + name;
             ui->comboBox_16_idParam->addItem(combined);
             ui->comboBox_23_idParam->addItem(combined);
+            ui->comboBox_28_idParam->addItem(combined);
         }
         paramId_16 = ui->comboBox_16_idParam->itemText(0);
         static const QRegularExpression re1("ID\\s*=\\s*(\\d+)");
@@ -597,6 +695,12 @@ void MainWindow::setComboBoxParam()
         match = re3.match(paramId_23);
         if (match.hasMatch()) {
             paramId_23 = match.captured(1);
+        }
+        paramId_28 = ui->comboBox_28_idParam->itemText(0);
+        static const QRegularExpression re4("ID\\s*=\\s*(\\d+)");
+        match = re4.match(paramId_28);
+        if (match.hasMatch()) {
+            paramId_28 = match.captured(1);
         }
     }
 }
@@ -940,6 +1044,19 @@ void MainWindow::onComboBox26Class(const QString &text)
     }
 }
 
+void MainWindow::onComboBox28Param(const QString &text)
+{
+    int index = ui->comboBox_28_idParam->findText(text);
+    if (index != -1) {
+        paramId_28 = ui->comboBox_28_idParam->itemText(index);
+        static const QRegularExpression re("ID\\s*=\\s*(\\d+)");
+        QRegularExpressionMatch match = re.match(paramId_28);
+        if (match.hasMatch()) {
+            paramId_28 = match.captured(1);
+        }
+    }
+}
+
 void MainWindow::onMyButtonClickAdd_1()
 {
     ui->textEdit_1_result->clear();
@@ -965,10 +1082,11 @@ void MainWindow::onMyButtonClickAdd_1()
 
         if (query.exec()) {
             while (query.next()) {
-                QString result_out = query.value(0).toString();
+                QString id_ei = query.value(0).toString();
+                QString result_out = query.value(1).toString();
                 if (result_out == "1")
                 {
-                    ui->textEdit_1_result->insertPlainText("Запись успешно создана.\n");
+                    ui->textEdit_1_result->insertPlainText("Запись успешно создана. Новый ID = " + id_ei + "\n");
                 } else if (result_out == "0") {
                     ui->textEdit_1_result->insertPlainText("Ошибка добавления.\n");
                 }
@@ -1128,7 +1246,7 @@ void MainWindow::onMyButtonClickMainClass_7()
         return;
     }
     QSqlQuery query;
-    query.prepare("SELECT * FROM FIND_CHILD(:pIdClass);");
+    query.prepare("SELECT * FROM FIND_CHILD(:pIdClass) ORDER BY CHILD_ID;");
     query.bindValue(":pIdClass", mainClass_7);
     if (query.exec()) {
         while (query.next()) {
@@ -1179,6 +1297,7 @@ void MainWindow::onMyButtonClickAdd_8()
 
 void MainWindow::onMyButtonClickDelete_9()
 {
+    qDebug() << "hjcjds";
     ui->textEdit_9_result->clear();
     QSqlQuery query;
     query.prepare("SELECT * FROM DELETE_PROD(:pCode);");
@@ -1186,14 +1305,17 @@ void MainWindow::onMyButtonClickDelete_9()
 
     if (query.exec()) {
         while (query.next()) {
+            qDebug() << "hk";
             QString result_out = query.value(0).toString();
             if (result_out == "1")
             {
                 ui->textEdit_9_result->insertPlainText("Запись успешно удалена.\n");
             } else if (result_out == "0") {
-                ui->textEdit_9_result->insertPlainText("Ошибка удаления.\n");
+                ui->textEdit_9_result->insertPlainText("Ошибка удаления." + query.lastError().text() + "\n");
             }
         }
+    } else {
+        ui->textEdit_9_result->insertPlainText("Ошибка удаления." + query.lastError().text() + "\n");
     }
 }
 
@@ -1264,13 +1386,10 @@ void MainWindow::onMyButtonClickAdd_13()
     if (image.isEmpty()) {
         image = "NULL";
     }
-    if (image == "NULL" && iVal == "NULL" && rVal == "NULL") {
-        ui->textEdit_13_result->insertPlainText("Ошибка добавления. Введите значение перечисления.\n");
-        return;
-    }
     if ((!name.isEmpty() && name != warnEmpty)){
         QSqlQuery query;
-        query.prepare("SELECT * FROM INS_VAL_ENUM(:pIdEnum, :pShortName, :pName, pRval, pIntVal, pPicVal);");
+        query.prepare("SELECT * FROM INS_VAL_ENUM(:pIdEnum, :pShortName, :pName, :pRval, :pIntVal, :pPicVal);");
+        qDebug() << idEnum_13 << " " << shortName <<  " " << name << " " << rVal << " " <<  iVal << " " << image;
         query.bindValue(":pIdEnum", idEnum_13);
         query.bindValue(":pShortName", shortName);
         query.bindValue(":pName", name);
@@ -1492,15 +1611,23 @@ void MainWindow::onMyButtonClickAdd_23()
     if (note.isEmpty()) {
         note = "NULL";
     }
-    if (!val.isEmpty() || str != warnEmpty) {
         QSqlQuery query;
-        query.prepare("SELECT * FROM WRITE_PAR_PROD(:pIdProd, :pIdPar, :pVal, :pStr, :pEnumVal, :pNote);");
-        query.bindValue(":pIdProd", prodId_23);
-        query.bindValue(":pIdPar", paramId_23);
-        query.bindValue(":pVal", val);
-        query.bindValue(":pStr", str);
-        query.bindValue(":pNote", note);
-        query.bindValue(":pEnumVal", idEnum_23);
+        if (val == "NULL") {
+            query.prepare("SELECT * FROM WRITE_PAR_PROD(:pIdProd, :pIdPar, NULL, :pStr, :pEnumVal, :pNote);");
+            query.bindValue(":pIdProd", prodId_23);
+            query.bindValue(":pIdPar", paramId_23);
+            query.bindValue(":pStr", str);
+            query.bindValue(":pEnumVal", idEnum_23);
+            query.bindValue(":pNote", note);
+        } else {
+            query.prepare("SELECT * FROM WRITE_PAR_PROD(:pIdProd, :pIdPar, :pVal, :pStr, :pEnumVal, :pNote);");
+            query.bindValue(":pIdProd", prodId_23);
+            query.bindValue(":pIdPar", paramId_23);
+            query.bindValue(":pVal", val);
+            query.bindValue(":pStr", str);
+            query.bindValue(":pEnumVal", idEnum_23);
+            query.bindValue(":pNote", note);
+        }
 
         if (query.exec()) {
             while (query.next()) {
@@ -1509,11 +1636,12 @@ void MainWindow::onMyButtonClickAdd_23()
                 {
                     ui->textEdit_23_result->insertPlainText("Значение успешно добавлено.\n");
                 } else if (result_out == "0") {
-                    ui->textEdit_23_result->insertPlainText("Ошибка добавления.\n");
+                    ui->textEdit_23_result->insertPlainText("Ошибка добавления." + query.lastError().text() + "\n");
                 }
             }
+        } else {
+            qDebug() << query.lastError().text();
         }
-    }
 }
 
 void MainWindow::onMyButtonClickCopy_25()
@@ -1551,8 +1679,14 @@ void MainWindow::onMyButtonClickProd_26()
             ui->tableWidget_26_prod->setRowHeight(rowCount, 30);
             QSqlRecord record = query.record();
             for (int i = 0; i < record.count(); ++i) {
-                QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
-                ui->tableWidget_26_prod->setItem(rowCount, i, item);
+                if (i < 6) {
+                    QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                    ui->tableWidget_26_prod->setItem(rowCount, i, item);
+                }
+                if (i > 6) {
+                    QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                    ui->tableWidget_26_prod->setItem(rowCount, i - 1, item);
+                }
             }
             ++rowCount;
         }
@@ -1578,6 +1712,40 @@ void MainWindow::onMyButtonClickSearch_26()
             }
             ++rowCount;
         }
+    }
+}
+
+void MainWindow::onMyButtonClickSearch_28()
+{
+    ui->tableWidget_28_search->setRowCount(0);
+    int rowCount = 0;
+    QString maxVal = ui->lineEdit_28_maxVal->text();
+    QString minVal = ui->lineEdit_28_minVal->text();
+    if (maxVal.isEmpty()) {
+        maxVal = "NULL";
+    }
+    if (minVal.isEmpty()) {
+        minVal = "NULL";
+    }
+    QSqlQuery query;
+    query.prepare("SELECT * FROM SEARCH_PRODUCTS_BY_PARAMETER(:pIdParam, :pMinVal, :pMaxVal);");
+    query.bindValue(":pIdParam", paramId_28);
+    query.bindValue(":pMinVal", minVal);
+    query.bindValue(":pMaxVal", maxVal);
+    if (query.exec()) {
+        while (query.next()) {
+            ui->tableWidget_28_search->insertRow(rowCount);
+            ui->tableWidget_28_search->setRowHeight(rowCount, 30);
+            QSqlRecord record = query.record();
+            for (int i = 0; i < record.count(); ++i) {
+                QTableWidgetItem *item = new QTableWidgetItem(record.value(i).toString());
+                qDebug() <<record.value(i).toString();
+                ui->tableWidget_28_search->setItem(rowCount, i, item);
+            }
+            ++rowCount;
+        }
+    } else {
+        qDebug() << query.lastError().text();
     }
 }
 

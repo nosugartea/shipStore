@@ -100,6 +100,7 @@ private slots:
     void onMyButtonClickCopy_25();
     void onMyButtonClickProd_26();
     void onMyButtonClickSearch_26();
+    void onMyButtonClickSearch_28();
 
     void onComboBox16ClassId(const QString &text);
     void onComboBox16ParamId(const QString &text);
@@ -111,6 +112,7 @@ private slots:
     void onComboBox25ClassId(const QString &text);
     void onComboBox26Prod(const QString &text);
     void onComboBox26Class(const QString &text);
+    void onComboBox28Param(const QString &text);
 
     // clear buttons
     void onClear4();
@@ -145,5 +147,6 @@ private:
     QString mainClass_25;
     QString classId_26;
     QString prodId_26;
+    QString paramId_28;
 };
 #endif // MAINWINDOW_H
